@@ -2,9 +2,9 @@
 int midX = 0;
 int midY = 0;
 int baseline = 0;
-float triangleCounter = 0;
 float scale = 1;
-float shapeBaseWidth = 50;
+float shapeBaseWidth = 40;
+//float shapeBaseWidth = 100;
 int backgroundColor = 210;
 
 // use the y-values of the sine function on [0,pi/2] to grow the line
