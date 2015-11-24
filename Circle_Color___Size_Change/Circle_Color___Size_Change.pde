@@ -63,7 +63,13 @@ void draw () {
       }
      
      // draw the circles
-      ellipse(mouseX, mouseY, diameter, diameter);
+     
+     // mix red color with connected potentiometer
+     float colorMix = arduino.analogRead(2)/4;
+      fill(colorMix, 0, 0);
+      
+      // change size of ellipse based on pressure in pressure sensor
+      ellipse(mouseX, mouseY, arduino.analogRead(0)/3, arduino.analogRead(0)/3);
       
  
   }
