@@ -1,10 +1,17 @@
 
 int diameter = 10;  // this is the size of the circle at the start of the sketch
+import processing.serial.*;
+import cc.arduino.*;
+
+Arduino arduino;
 
 // the basics, yo
 void setup() {
   size(500,500);
   background(255);  // white background
+  
+  arduino = new Arduino(this, Arduino.list()[2], 57600);
+  //arduino.pinMode(ledPin, Arduino.OUTPUT);
 }
 
 
