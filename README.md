@@ -1,2 +1,3 @@
 # Processing
-I'm going to keep my Processing examples and experiments here
+Processing work at Riverpoint Academy. A Project Based Public High School. Learn more at [riverpointacademy.com](http://riverpointacademy.com)
+
