@@ -47,23 +47,13 @@ void draw()
   //myCar2.drive();
   //myCar2.display();
   
-  // Setup and show the first two car objects
   
-  cars.get(0).drive();
-  cars.get(0).display();
-  cars.get(1).drive();
-  cars.get(1).display();
-  
-  // this would work just like the lines above but would be much more efficient
-  // if I had wanted to start with more than two cars.
-  // what I'm NOT SURE ABOUT is if this gets called again and "redraws" cars I've already
-  // drawn in the mouseClicked() method below.
-  
-  //for(int i = 0; i< cars.size(); i++)
-  //{
-  // cars.get(i).drive();
-  // cars.get(i).display();
-  //}
+  // Make sure the car objects are shown each time through the void draw() loop 
+  for(int i = 0; i< cars.size(); i++)
+  {
+  cars.get(i).drive();
+  cars.get(i).display();
+  }
   
 }
 
