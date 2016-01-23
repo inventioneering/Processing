@@ -1,5 +1,5 @@
 int param = 25;
-int isGrowing = 1;
+int isGrowing = 0;
 
 
 void setup() {
@@ -14,15 +14,30 @@ void setup() {
 void draw() 
 {
 
-    for(int i = 0; i < 5; i++)
-    {
-      drawCircle(mouseX+20*i, mouseY);
-      drawCircle(mouseX, mouseY+20*i);
-      drawCircle(mouseX-20*i, mouseY);
-      drawCircle(mouseX, mouseY-20*i);
-    }
+    //for(int i = 0; i < 5; i++)
+    //{
+    //  drawCircle(mouseX+20*i, mouseY);
+    //  drawCircle(mouseX, mouseY+20*i);
+    //  drawCircle(mouseX-20*i, mouseY);
+    //  drawCircle(mouseX, mouseY-20*i);
+    //}
+    
+    drawCircle(mouseX,mouseY);
     
 
+}
+
+void timedCircle()
+{
+  int startTime = millis();
+  while((millis() - startTime) > 2000)
+  {
+    
+    
+    
+  }
+ 
+  
 }
 
 void drawCircle(int xMouse, int yMouse)

@@ -40,7 +40,7 @@ void setup()
 void draw()
 {
   background(255);
-  
+
   // These are from the first version, before the ArrayList was created
   //myCar1.drive();
   //myCar1.display();
@@ -61,7 +61,7 @@ void draw()
 // instatiated, and drawn on screen.  The speed and color attributes are chosen at random
 // and the posotion is based on where the user clicks.
 
-void mouseClicked()
+void mousePressed()
 {
     randomColor = color(random(0,255), random(0,255), random(0,255));
     randomSpeed = int(random(1,6));
