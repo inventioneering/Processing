@@ -26,7 +26,10 @@ void draw()
 
 void mousePressed()
 {
-  randomColor = color(random(255),random(255),random(255));
+  //randomColor = color(random(255),random(255),random(255));
+  
+  // random red values
+  randomColor = color(random(100,255),0,0);
   randomRadius = random(2,maxRadius);
   
   pulsars.add(new Pulsar(mouseX,mouseY,randomColor, randomRadius));
