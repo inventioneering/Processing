@@ -12,7 +12,9 @@ void draw() {
   if(mousePressed == true) {
     ellipse(width/2, height/2, param, param);
     param++;
-  } else {
+  } 
+  //additonal space so it easier to follow 
+  else {
     param = 25;
     ellipse(width/2, height/2, param, param);
   }
