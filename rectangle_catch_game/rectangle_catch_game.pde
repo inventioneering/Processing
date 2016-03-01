@@ -27,9 +27,15 @@ void setup()
 
 void draw()
 {
+  
   if(gameOver == 0)
   {
   background(255);
+  fill(255,0,0);
+  rect(width/2, boxY, width, boxHeight);
+  fill(255);
+  noStroke();
+  rect(boxX,boxY, boxWidth, boxHeight); 
 
  fill(0,255,0);
  
@@ -43,7 +49,6 @@ void draw()
     fill(255);
     rect(boxX,boxY, boxWidth, boxHeight);  
     boxX += speedControl;
-    
   }
   
   // left arrow key press
