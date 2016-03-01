@@ -31,7 +31,7 @@ void draw()
   if(gameOver == 0)
   {
   background(255);
-  fill(255,0,0);
+  fill(0);
   rect(width/2, boxY, width, boxHeight);
   fill(255);
   noStroke();
@@ -43,7 +43,7 @@ void draw()
   {
     //keyCode = 36;
     background(255);
-    fill(255,0,0);
+    fill(0);
     rect(width/2, boxY, width, boxHeight);
     noStroke();
     fill(255);
@@ -56,7 +56,7 @@ void draw()
   {
     //keyCode = 36;
     background(255);
-    fill(255,0,0);
+    fill(0);
     rect(width/2, boxY, width, boxHeight);
     noStroke();
     fill(255);
@@ -107,7 +107,6 @@ void draw()
     leftEdgeOfHole = boxX-boxWidth/2;
     rightEdgeOfHole = boxX+boxWidth/2;
     background(0);
-    textMode(CENTER);
     fill(255);
     text("Game Over!",width/2,height/2);
     text("Press R to Restart",width/2,height/2+20);
