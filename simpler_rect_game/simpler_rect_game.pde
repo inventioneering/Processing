@@ -3,6 +3,12 @@
 // 
 // The goal of this challenge was to create a game from the same components as
 // another sketch that have been repurposed.  
+//
+// 
+// I was inspired by this.  I used this authors gameOver idea and brought it 
+// into this sketch:
+// http://www.123mylist.com/2013/12/basic-pong-game-using-processing.html
+
 
 
 
