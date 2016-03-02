@@ -16,10 +16,12 @@ void draw()
   fill(255,0,0);
   noStroke();
   float touch = red(get(x,y));
+  
   ellipse(x,y,10,10);
   
   if(touch < 255)
   {
+    println(touch);
    x = 162;
    y = 162;
   }
