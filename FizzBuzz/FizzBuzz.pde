@@ -24,13 +24,15 @@ for(int i = 1; i <= 100; i++)
   
   if(output == "")
   {
-   output = String(char(i)); 
+   output = String(i);  // this won't work because I can't convert and int to a String
   }
   
   println(output);
 }
 
 // First Attempt -- this is the one I submitted in my application
+// it works fine but this said it was gross: 
+// http://c2.com/cgi/wiki?FizzBuzzTest
 
 //for(int i = 1; i<101; i++)
 //{
