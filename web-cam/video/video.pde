@@ -1,6 +1,8 @@
 import processing.video.*;
 
 Capture cam;
+int imageWidth = width;
+int imageHeight = height;
 
 void setup() {
   size(640, 480);
@@ -20,8 +22,8 @@ void setup() {
     // element from the array returned by list():
     cam = new Capture(this);
     cam.start(); 
-    int imageWidth = width;
-    int imageHeight = height;
+    imageWidth = width;
+    imageHeight = height;
        
 }
 
