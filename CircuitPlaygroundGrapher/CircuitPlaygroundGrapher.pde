@@ -19,7 +19,7 @@ void setup() {
     
   // Prints out the available serial ports.
   // println(Arduino.list());
-  arduino = new Arduino(this, "/dev/cu.usbmodem14611", 57600);
+  arduino = new Arduino(this, "/dev/cu.usbmodem14121", 9600);
   
   for(int i = 0; i< 9999; i++) {
     valStrings[i] = "0";
@@ -27,6 +27,7 @@ void setup() {
 }
 
 void draw() {
+  arduino.analogRead(sensorNumber);
   fill(255);
   textSize(16);
   text("Press Any Key to save data to file", 40,40);
