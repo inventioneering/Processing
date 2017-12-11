@@ -19,7 +19,7 @@ void setup() {
     
   // Prints out the available serial ports.
   // println(Arduino.list());
-  arduino = new Arduino(this, "/dev/cu.usbmodem14121", 9600);
+  arduino = new Arduino(this, "/dev/cu.usbmodem14111", 9600);
   
   for(int i = 0; i< 9999; i++) {
     valStrings[i] = "0";
