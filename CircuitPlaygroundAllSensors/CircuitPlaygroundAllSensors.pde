@@ -23,6 +23,9 @@
 //  Here's a link to the complete Arduino code:  http://bit.ly/2Ek6inT
 //
 
+PImage photo;
+
+
 import processing.serial.*; 
 float[] portValues = new float[8];
 
@@ -36,9 +39,10 @@ void setup()
   size(400, 200);
   frameRate(30);
   rectMode(CENTER);
+  photo = loadImage("sound.png");
   
   // change the port name to match yours
-  myPort = new Serial(this, "/dev/cu.usbmodem14111", 9600);
+  myPort = new Serial(this, "/dev/cu.usbmodem14421", 9600);
   
   // fill up the portValues array with zeros
   for(int i = 0; i<8; i++)
@@ -47,28 +51,45 @@ void setup()
   }
 } 
 
-void draw() {  
-  background(0);
+void draw() { 
+  background(255);
   
-  // if the current reading is not null, process the values
+   // if the current reading is not null, process the values
   if (inString != null) {
     portValues = processSensorValues(inString);
   }
   
-  // get the z value from the accelerometer
+  // use sound value to show sound icon
+  float soundValue = map(portValues[6],200,1023,0,255);
+  if(soundValue > 60) {
+     image(photo, 0, 0);
+     
+  } 
+  
+  // use the temperature value to change to opacity of the rectangle
+  float tempValue = map(portValues[7],77,86,0,255);
+ 
+  
+  // get the z value from the accelerometer, use to change rect. size.
   float z = -portValues[2]/3;
   
   // change the fill color based on the button presses
   if(portValues[3] == 1) {
-   fill(255,0,0); 
+   fill(255,0,0,tempValue); 
   } else if(portValues[4] == 1) {
-   fill(0,255,0);
+   fill(0,255,0,tempValue);
   } else {
-   fill(255); 
+   fill(0,0,255,tempValue); 
   }
   
+  // use the light value to round rectangle corners
+  float lightValue = portValues[5];
+  
+
+ 
+  
   // draw resulting rectangle
-  rect(width/2+portValues[1]*10, height/2+portValues[0]*10, 40*z, 40*z);
+  rect(width/2+portValues[1]*10, height/2+portValues[0]*10, 40*z, 40*z,lightValue);
   
   println(inString);
 } 
@@ -77,8 +98,15 @@ void draw() {
 //  change those values from String to float and store them
 //  in a new array.  Return this array to be used in draw loop above
 float[] processSensorValues(String valString) {
+  
   String[] temp = new String[8];
   temp = split(valString,"\t");
+  
+  if(temp == null) {
+    for(int i = 0; i<8; i++) {
+      temp[i] = "0"; 
+    }
+  }
   
   float[] vals = new float[8];
   for(int i = 0; i<8; i++)
