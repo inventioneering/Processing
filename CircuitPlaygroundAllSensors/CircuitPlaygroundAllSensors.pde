@@ -1,4 +1,4 @@
-
+// I just added this
 // Getting values from Circuit Playground via Serial
 //
 //  here is the Arduino code for the Serial package:
@@ -95,7 +95,7 @@ void draw() {
 } 
 
 //  get values from string you've read in via serial
-//  change those values from String to float and store them
+//  change those values from String to float and store themx  
 //  in a new array.  Return this array to be used in draw loop above
 float[] processSensorValues(String valString) {
   
