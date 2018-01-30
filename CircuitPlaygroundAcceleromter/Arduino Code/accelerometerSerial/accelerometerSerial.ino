@@ -8,15 +8,20 @@ void setup() {
 }
 
 void loop() {
-  X = CircuitPlayground.motionX();
-  Y = CircuitPlayground.motionY();
-  Z = CircuitPlayground.motionZ();
-
-  Serial.print(X);
+  Serial.print(CircuitPlayground.motionX());
   Serial.print("\t");
-  Serial.print(Y);
+  Serial.print(CircuitPlayground.motionY());
   Serial.print("\t");
-  Serial.println(Z);
-
-  delay(50);
+  Serial.print(CircuitPlayground.motionZ());
+  Serial.print("\t");
+  Serial.print(CircuitPlayground.leftButton());
+  Serial.print("\t");
+  Serial.print(CircuitPlayground.rightButton());
+  Serial.print("\t");
+  Serial.print(CircuitPlayground.lightSensor());
+  Serial.print("\t");
+  Serial.print(CircuitPlayground.soundSensor());
+  Serial.print("\t");
+  Serial.println(CircuitPlayground.temperatureF());
+  //delay(50);
 }
