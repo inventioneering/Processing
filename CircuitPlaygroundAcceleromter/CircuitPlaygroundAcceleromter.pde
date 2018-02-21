@@ -6,7 +6,7 @@ void setup() {
   size(500,500);
   background(0);
   smooth();
-  myPort = new Serial(this, "/dev/cu.usbmodem14621", 9600);
+  myPort = new Serial(this, "/dev/cu.usbmodem14521", 9600);
   myPort.bufferUntil('\n');
   rectX = width/2;
   rectY = height/2;
