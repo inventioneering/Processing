@@ -23,8 +23,11 @@ void draw() {
   pushMatrix();
   translate(width/2, height/2); 
   
-  // map atan2 values to -PI/2 to PI/2
-  float map = map(atan2(mouseY,mouseX),0,PI/2,-PI/2,PI/2);
+  // move to center of image for rotation
+  float map = atan2(mouseY-height/2,mouseX-width/2);
+ 
+  // show angle values
+  println(map);
   
   // then pivot the grid
   rotate(map);
