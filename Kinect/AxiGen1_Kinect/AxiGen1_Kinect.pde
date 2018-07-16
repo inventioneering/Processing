@@ -16,7 +16,8 @@ import processing.serial.*;
 
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 boolean firstPoint = true;
-boolean debug = true;
+boolean debug = false;
+boolean kinectDrawing = false;
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 // User Settings: 
@@ -71,6 +72,7 @@ int MousePaperLeft =  30;
 int MousePaperRight =  770;
 int MousePaperTop =  62;
 int MousePaperBottom =  600;
+
 
 int yBrushRestPositionPixels = 6;
 
@@ -626,7 +628,13 @@ void mousePressed() {
     //drawBox(mouseX, mouseY, random(500), random(200));
     
    
-    drawPoint(mouseX, mouseY);
+    //drawPoint(mouseX, mouseY);
+    
+   // kinectDrawing(mouseX, mouseY);
+   
+   //movePenWithMouse(mouseX, mouseY);
+   
+   motorHalfway();
 
     doHighlightRedraw = true;
   }
@@ -788,6 +796,13 @@ void keyPressed()
     // println("Key pressed: " + key); 
     }
     
+    if (key == 'k') // toggle kinectDrawing mode
+    {
+      kinectDrawing = !kinectDrawing;
+      if(debug && kinectDrawing) { println("kinectDrawing: ON"); }
+      if(debug && !kinectDrawing) { println("kinectDrawing: OFF"); }
+    }
+    
     if (key == 'p') // check to see if parked
     {
      isParkedQ(); 
@@ -797,9 +812,9 @@ void keyPressed()
     {
      debug = !debug; 
      if(debug) {
-      println("debug mode activated"); 
+      println("debug: ON"); 
      } else {
-      println("debug mode deactivated"); 
+      println("debug: OFF"); 
      }
     }
 
