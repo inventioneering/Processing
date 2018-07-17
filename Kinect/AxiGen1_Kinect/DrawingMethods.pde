@@ -1,14 +1,31 @@
-// drawing methods
+// helper functions
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-void motorToHome() {
- MoveToXY(0,0); 
+// convert from screen pixel location (in processing) to corresponding position on plotter
+int screenXToMotorX(int x) {
+ return int(floor(float(x - MousePaperLeft) * MotorStepsPerPixel)); 
 }
 
-void motorHalfway() {
- //MoveToXY(int(floor((740/2)*MotorStepsPerPixel)),0); 
- MoveToXY(MotorMaxY,0); 
+int screenYToMotorY(int y) {
+ return int(floor(float(y - MousePaperTop) * MotorStepsPerPixel)); 
 }
 
+// move to this position you've just calculated with helper functions
+void moveXYUsingScreenValues(int x, int y) {
+  int xPos = screenXToMotorX(x);
+  int yPos = screenYToMotorY(y);
+  if (debug) { println("xPos: " + xPos + " yPos: " + yPos); }
+  MoveToXY(xPos, yPos);
+}
+
+// special case of the above function that makes sure point is within appropriate boundary
+void safeMove(int x, int y) {
+  if(x >= MousePaperLeft && x <= MousePaperRight && y >= MousePaperTop && y <= MousePaperBottom ) {
+    moveXYUsingScreenValues(x,y); 
+  }
+}
+
+// add commands to ToDoList
 void penUp() {
   ToDoList = (PVector[]) append(ToDoList, new PVector(-30, 0)); //Command 30 (raise pen)
 }
@@ -17,6 +34,7 @@ void penDown() {
   ToDoList = (PVector[]) append(ToDoList, new PVector(-31, 0)); //Command 31 (lower pen)
 }
 
+// check to see if the head is parked
 boolean isParkedQ() {
   PVector cur = ToDoList[ToDoList.length-1];
   if (cur.x == -35 && cur.y == 0.0 && cur.z == 0.0) {
@@ -28,56 +46,22 @@ boolean isParkedQ() {
   }
 }
 
-void drawPoint(float xStart, float yStart) {
-  // check to see if any other points have been drawn
-  if(isParkedQ()) {
-    penUp();
-    ToDoList = (PVector[]) append(ToDoList, new PVector(xStart,yStart)); // Command Code: Move to first (X,Y) point
-    penDown();
-  } else {
-   ToDoList = (PVector[]) append(ToDoList, new PVector(xStart,yStart)); // Command Code: Move to first (X,Y) point
-  }
- 
-  if(debug) {
-  println(ToDoList);
-  //println(xStart, yStart);
-  }
-}
+
+
+
+// kinect functions
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 PVector getKinectObjectPostion(float x, float y) {
   // uh, I'm gonna build this out
- return new PVector(x+random(-100,100), y+random(-100,100));
+ return new PVector(x+random(-10,10), y+random(-10,10));
 }
 
-void movePenWithMouse(float x, float y) {
- MoveRelativeXY(mouseX, mouseY); 
-}
 
-void kinectDrawing(float xStart, float yStart) {
-  penUp();
 
-  // Command Code: Move to first (X,Y) point
-  ToDoList = (PVector[]) append(ToDoList, new PVector(xStart, yStart));
 
-  penDown();
-  
-  
-  PVector cur;
-  
-  // I want to be able to toggle the kinectDrawing mode with a key press
-  // I cannot listen for key presses inside a while loop so... this doesn't work right now.
-  for(int i = 0; i< 10; i++) {
-    cur = getKinectObjectPostion(xStart, yStart);
-    ToDoList = (PVector[]) append(ToDoList, new PVector(cur.x, cur.y));
-    drawToDoList();
-    Paused = false;
-    pause();
-    //Paused = true;
-  }
-  
-  penUp();
-}
-
+// testing movement functions
+// -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 void drawBox(float xStart, float yStart, float width, float height)
 {
   penUp();
@@ -98,4 +82,20 @@ void drawBox(float xStart, float yStart, float width, float height)
   ToDoList = (PVector[]) append(ToDoList, new PVector(xStart, yStart));
 
   penUp();
+}
+
+void drawPoint(float xStart, float yStart) {
+  // check to see if any other points have been drawn
+  if(isParkedQ()) {
+    penUp();
+    ToDoList = (PVector[]) append(ToDoList, new PVector(xStart,yStart)); // Command Code: Move to first (X,Y) point
+    penDown();
+  } else {
+   ToDoList = (PVector[]) append(ToDoList, new PVector(xStart,yStart)); // Command Code: Move to first (X,Y) point
+  }
+ 
+  if(debug) {
+  println(ToDoList);
+  //println(xStart, yStart);
+  }
 }
