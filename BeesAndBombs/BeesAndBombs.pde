@@ -1,73 +1,51 @@
-// https://twitter.com/beesandbombs/status/1019924265540431872
+// trying to copy: https://twitter.com/beesandbombs/status/1019924265540431872
 
-void box() {
- pushMatrix();
- translate(width/2, height/2);
- rect(0,0,50,50); 
- popMatrix();
+// Globals
+// *************************************************************************************************
+int gridWidth = 50;
+boolean grid = true;
+// *************************************************************************************************
+
+
+float getLength(float x) {
+  //https://www.desmos.com/calculator/mu1snong2u
+  return 0.6714*x*x-1.0548*x+sqrt(2);
 }
 
-void segment() {
- line(-25,-25,25,25);
+void segment(float length) {
+  float p = length/2;
+  line(-p, -p, p, p);
 }
 
-void drawRotated(float amount) {
+void drawRotated(float angle, float length) {
+  float l = length*(gridWidth/sqrt(2));
   pushMatrix();
   translate(width/2, height/2);
-  rotate(radians(amount));
-  segment();
+  rotate(angle);
+  segment(l);
   popMatrix();
 }
 
+void example() {
+  float angle = map(mouseX, 0, width, 0, PI/2);
+  float l = getLength(angle);
+  println(angle);
+  drawRotated(angle, l);
+}
+
+// *************************************************************************************************
 void setup() {
-  size(600,600);
+  size(600, 600);
   background(255);
+  smooth(8);
   rectMode(CENTER);
   stroke(0);
   strokeWeight(2);
-  smooth(8);
-  //noLoop();
 }
 
 void draw() {
   background(255);
-  box();
-  
- float amount = map(mouseX, 0, width, 0, 90);
-     drawRotated(amount);
-}
-  //for(int i = 0; i < width; i+=50) {
-  //  for(int j = 0; j < height; j+=50) {
-  //    if(j%2 !=0) {
-  //      shape(segment, i, j);
-  //    } else {
-  //      pushMatrix();
-  //      translate(i,j);
-  //      rotate(radians(90));
-  //      shape(segment, i, j);
-  //      popMatrix();
-  //    }
-      
-  //  } 
-  //}
+  if(grid) { drawGrid(gridWidth); } // toggle with 'g' key
 
-
-
-
-
-void rotate() {
- 
-  smooth();
-
-  pushMatrix();
-  // move the origin to the pivot point
-  translate(40, 40); 
-  
-  // then pivot the grid
-  rotate(radians(45));
-  
-  // and draw the square at the origin
-  fill(0);
-  rect(0, 0, 40, 40);
-  popMatrix(); 
+  example();
 }
