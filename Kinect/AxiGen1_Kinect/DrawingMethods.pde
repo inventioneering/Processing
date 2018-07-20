@@ -14,7 +14,7 @@ int screenYToMotorY(int y) {
 void moveXYUsingScreenValues(int x, int y) {
   int xPos = screenXToMotorX(x);
   int yPos = screenYToMotorY(y);
-  if (debug) { println("xPos: " + xPos + " yPos: " + yPos); }
+  //if (debug) { println("xPos: " + xPos + " yPos: " + yPos); }
   MoveToXY(xPos, yPos);
 }
 
@@ -52,12 +52,13 @@ boolean isParkedQ() {
 // kinect functions
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
-PVector getKinectObjectPostion(float x, float y) {
-  // uh, I'm gonna build this out
- return new PVector(x+random(-10,10), y+random(-10,10));
+PVector getKinectObjectPostion() {
+  //get lerped position from global tracker object. methods defined in KinectTracker class
+  PVector lerp = tracker.getLerpedPos();
+  
+  // adjust this position for the global kinectImageOffset pvector that is used shift the image on screen
+  return new PVector(lerp.x + kinectImageOffset.x, lerp.y + kinectImageOffset.y);
 }
-
-
 
 
 // testing movement functions

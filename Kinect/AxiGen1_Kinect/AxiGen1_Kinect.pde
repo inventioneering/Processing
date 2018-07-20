@@ -1,23 +1,39 @@
 /*
-  AxiGen
- 
- Generative art example with AxiDraw
- https://github.com/evil-mad/AxiDraw-Processing
- 
- 
- Based on RoboPaint RT: 
- https://github.com/evil-mad/robopaint-rt
- 
- */
 
+  Based on:  AxiGen
+ 
+  Generative art example with AxiDraw
+  https://github.com/evil-mad/AxiDraw-Processing
+ 
+  AND...
+   
+  https://github.com/shiffman/OpenKinect-for-Processing
+  http://shiffman.net/p5/kinect/
+   
+  by Daniel Shiffman
+  
+  
+  I want to draw by waving my hands.  
+  I've combined Kinect motion tracking with direct control of axi draw pen plotter.
+  
+  Matt Green: https://github.com/matthewalangreen
+  
+ */
+ 
 import de.looksgood.ani.*;
 import processing.serial.*;
+import org.openkinect.processing.*;
+ 
 
+// The kinect stuff is happening in KinectTracker class
+KinectTracker tracker;
+Kinect kinect;
 
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 boolean firstPoint = true;
 boolean debug = false;
 boolean kinectDrawing = false;
+PVector kinectImageOffset = new PVector(80,71);
 // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 
 // User Settings: 
@@ -36,9 +52,6 @@ int delayAfterLoweringBrush = 300; //ms
 boolean debugMode = false;
 
 boolean PaperSizeA4 = false; // true for A4. false for US letter.
-
-
-
 
 // Offscreen buffer images for holding drawn elements, makes redrawing MUCH faster
 
@@ -176,6 +189,9 @@ void setup()
 {
   size(800, 631, P2D);
   //pixelDensity(2);
+  
+  kinect = new Kinect(this);
+  tracker = new KinectTracker();
 
 
   Ani.init(this); // Initialize animation library
@@ -523,6 +539,9 @@ void drawToDoList()
 
 
 void draw() {
+  
+
+  
 
   if (debugMode)
   {
@@ -565,6 +584,9 @@ void draw() {
   {
 
     image(imgMain, 0, 0, width, height);    // Draw Background image  (incl. paint paths)
+    
+    // Show the kinect image
+    tracker.display();
 
     // Draw buttons image
     image(imgButtons, 0, 0);
@@ -614,8 +636,36 @@ void draw() {
   // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
   // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
   // -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-  PVector t =  getKinectObjectPostion(mouseX, mouseY);
-  safeMove(int(t.x), int(t.y));
+  
+  // Run the tracking analysis
+  tracker.track();
+  //// Show the image
+  //tracker.display();
+  
+  // Let's draw the "lerped" location
+  PVector dot = tracker.getLerpedPos();
+  fill(100, 250, 50, 200);
+  smooth(8);
+  noStroke();
+  pushMatrix();
+  translate(kinectImageOffset.x, kinectImageOffset.y);
+  ellipse(dot.x, dot.y, 20, 20);
+  popMatrix();
+  if (debug) { 
+    print("x: " + dot.x + " ");
+    print("dx: " + (dot.x + kinectImageOffset.x) + " ");
+    print("y: " + dot.y + " ");
+    print("dy: " + (dot.y + kinectImageOffset.y) + " ");
+    println();
+  }
+     
+  if(kinectDrawing) {
+    
+    PVector t =  getKinectObjectPostion();
+    //safeMove(mouseX, mouseY);
+    safeMove(int(t.x), int(t.y));
+  }
+  
 }
 
 
@@ -803,9 +853,12 @@ void keyPressed()
     // println("Key pressed: " + key); 
     }
     
+    
     if (key == 'k') // toggle kinectDrawing mode
     {
       kinectDrawing = !kinectDrawing;
+      if (!kinectDrawing) { MotorsOff(); } // turn motors off when not drawing
+      //if(kinectDrawing) { MoveToXY(0,0); }
       if(debug && kinectDrawing) { println("kinectDrawing: ON"); }
       if(debug && !kinectDrawing) { println("kinectDrawing: OFF"); }
     }
@@ -845,7 +898,9 @@ void keyPressed()
     if ( key == 'q')  // Move home (0,0)
     {
       raiseBrush();
+      MotorSpeed = 6000;
       MoveToXY(0, 0);
+      MotorSpeed = 4000;
     }
 
     if ( key == 'h')  // display help
