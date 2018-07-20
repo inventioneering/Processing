@@ -3,7 +3,8 @@
 // Globals
 // *************************************************************************************************
 int gridWidth = 50;
-boolean grid = true;
+boolean grid = false;
+boolean debug = false;
 // *************************************************************************************************
 
 
@@ -29,7 +30,7 @@ void drawRotated(float angle, float length) {
 void example() {
   float angle = map(mouseX, 0, width, 0, PI/2);
   float l = getLength(angle);
-  println(angle);
+  if(debug) { println("Angle: " + angle); }
   drawRotated(angle, l);
 }
 
