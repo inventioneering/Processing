@@ -32,6 +32,7 @@ class Segment
     if(debug) {
      fill(255,0,0);
      ellipse(center.x,center.y,5,5);
+     //println("showing centers");
     }
   }
   
