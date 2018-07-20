@@ -1,5 +1,5 @@
 void drawGrid(int size) {
-  rectMode(CENTER);
+ 
   pushStyle();
   strokeWeight(1);
   int rows, cols;
