@@ -21,8 +21,23 @@ class Segment
     return 0.6714*angle*angle-1.0548*angle+sqrt(2);
   }
   
+   int getLength() {
+     return this.segmentLength; 
+   }
+
+  PVector getCenter() {
+    return this.center; 
+  }
+
+
   // methods
   // *************************************************************************************************
+  
+  void makeLine() {
+    float p = segmentLength/2;
+    line(-p,-p,p,p);
+  }
+  
   void show() {
     float p = segmentLength/2;
     pushMatrix();
@@ -32,24 +47,22 @@ class Segment
     if(debug) {
      fill(255,0,0);
      ellipse(center.x,center.y,5,5);
-     //println("showing centers");
     }
   }
   
-
-  
-  void rotate(float angle) {
-    
-  }
-  
-  void drawRotated(float angle, float length) {
-  float l = length*($gridWidth/sqrt(2));
-  pushMatrix();
-  translate(width/2, height/2);
-  rotate(angle);
-  segment(l);
-  popMatrix();
-}
- 
+  void show(float angle) {
+    float l = getLength(angle);
+    float k = (segmentLength/sqrt(2));
+    float p = (l*k)/2;
+    pushMatrix();
+    translate(center.x,center.y); // move to center + 1/2 line length
+    rotate(angle);
+    line(-p,-p,p,p);
+    popMatrix();
+    if(debug) {
+     fill(255,0,0);
+     ellipse(center.x,center.y,5,5);
+    }
+    }
 
 }

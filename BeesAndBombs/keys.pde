@@ -6,6 +6,7 @@ void keyPressed() {
   } else {
     printD("grid",false); 
   }
+  //drawGrid($gridWidth);
  }
  
  if(key == 'd') {
@@ -15,6 +16,11 @@ void keyPressed() {
   } else {
     printD("debug",false); 
   }
+ }
+ 
+ if(key == 'r') {
+  background(255);
+  drawRandom(); 
  }
 }
 
