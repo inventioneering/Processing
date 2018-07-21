@@ -1,3 +1,31 @@
+float getLength(float angle) { // in radians
+  //https://www.desmos.com/calculator/mu1snong2u
+  return 0.6714*angle*angle-1.0548*angle+sqrt(2);
+}
+
+void segment(float length) {
+  float p = length/2;
+  line(-p, -p, p, p);
+}
+
+void drawRotated(float angle, float length) {
+  float l = length*($gridWidth/sqrt(2));
+  pushMatrix();
+  translate(height/2, width/2);
+  rotate(angle);
+  segment(l);
+  popMatrix();
+}
+
+void example() {
+  float angle = map(mouseX, 0, width, 0, PI/2);
+  if(debug) { println("Angle: " + angle); }
+  drawRotated(angle, getLength(angle));
+}
+
+
+
+
 void drawGrid(int size) {
  
   pushStyle();
