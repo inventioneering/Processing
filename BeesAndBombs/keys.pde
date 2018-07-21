@@ -18,9 +18,19 @@ void keyPressed() {
   }
  }
  
+ if(key == 'l') {
+  looping = !looping;
+  if(looping) {
+   loop(); 
+  } else {
+   noLoop(); 
+  }
+ }
+ 
  if(key == 'r') {
   background(255);
   drawRandom(); 
+  //loop();
  }
 }
 

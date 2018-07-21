@@ -2,9 +2,10 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 50;
+int $gridWidth = 20;
 boolean grid = false;
 boolean debug = false;
+boolean looping = false;
 Segment s1;
 Segment s2;
 Segment s3;
@@ -52,20 +53,27 @@ void setup() {
   rows = height/$gridWidth;
   
   // fill up ArrayList first row
-  for (int i = 0; i<cols; i++) {
-    segments.add(new Segment(0+$gridWidth*i, 0));  
-  }
+  //for (int i = 0; i<cols; i++) {
+  //  segments.add(new Segment(0+$gridWidth*i, 0));  
+  //}
+  
+  //for (int i = 0; i<cols; i++) {
+  //  segments.add(new Segment(0+$gridWidth*i, 0+$gridWidth));
+  //}
   
   for (int i = 0; i<cols; i++) {
-    segments.add(new Segment(0+$gridWidth*i, 0+$gridWidth));
+   for (int j = 0; j<rows; j++){
+    segments.add(new Segment(0+$gridWidth*j,0+$gridWidth*i)); 
+   }
   }
   
 }
 
 void drawRandom() {
    //show first row of ArrayList
-  for (int i = 0; i<cols*2; i++) {
+  for (int i = 0; i<cols*rows; i++) {
     float angle;
+    //angle = map(mouseX, 0, width, 0, PI/2);
     float r = random(0,1);
     if(r < 0.5) {
      angle = PI/2; 
