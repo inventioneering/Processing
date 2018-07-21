@@ -5,6 +5,8 @@ class Segment
   int segmentLength;
   // use "static" keyword to make class variable
   PVector center;
+  float angle;
+  float newLength;
   
   // constructor 
   // *************************************************************************************************
@@ -12,6 +14,8 @@ class Segment
     segmentLength = $gridWidth;
     float p = segmentLength/2;
     center = new PVector(x+p,y+p);
+    angle = 0;
+    newLength = segmentLength;
   }
   
   // helper methods
@@ -50,7 +54,8 @@ class Segment
     }
   }
   
-  void show(float angle) {
+  void show(float _angle) {
+    angle = _angle;
     float l = getLength(angle);
     float k = (segmentLength/sqrt(2));
     float p = round((l*k)/2);

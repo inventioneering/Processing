@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 50;
+int $gridWidth = 20;
 boolean grid = false;
 boolean debug = false;
 boolean looping = false;
@@ -41,7 +41,7 @@ void example() {
 
 // *************************************************************************************************
 void setup() {
-  size(600, 600);
+  size(500, 500);
   background(255);
   smooth(8);
   rectMode(CORNER);
