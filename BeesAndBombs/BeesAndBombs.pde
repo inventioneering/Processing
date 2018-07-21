@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 20;
+int $gridWidth = 50;
 boolean grid = false;
 boolean debug = false;
 boolean looping = false;
@@ -47,7 +47,7 @@ void setup() {
   rectMode(CORNER);
   stroke(0);
   strokeWeight(2);
-  noLoop();
+  //noLoop();
 
   cols = width/$gridWidth;
   rows = height/$gridWidth;
@@ -88,7 +88,11 @@ void draw() {
   background(255);
   if(grid) { drawGrid($gridWidth); } // toggle with 'g' key
 
-  drawRandom();
+  if(looping) {
+   drawRandom();
+   noLoop();
+  }
+  
   
   //Segment s = segments.get(0);
   //Segment s2 = segments.get(1);

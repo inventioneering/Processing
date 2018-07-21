@@ -39,7 +39,7 @@ class Segment
   }
   
   void show() {
-    float p = segmentLength/2;
+    float p = round(segmentLength/2);
     pushMatrix();
     translate(center.x,center.y); // move to center + 1/2 line length
     line(-p, -p, p, p);
@@ -53,7 +53,7 @@ class Segment
   void show(float angle) {
     float l = getLength(angle);
     float k = (segmentLength/sqrt(2));
-    float p = (l*k)/2;
+    float p = round((l*k)/2);
     pushMatrix();
     translate(center.x,center.y); // move to center + 1/2 line length
     rotate(angle);

@@ -29,7 +29,9 @@ void keyPressed() {
  
  if(key == 'r') {
   background(255);
+  loop();
   drawRandom(); 
+  noLoop();
   //loop();
  }
 }
