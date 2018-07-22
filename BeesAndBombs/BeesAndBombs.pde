@@ -9,7 +9,7 @@ boolean looping = false;
 Segment s1;
 Segment s2;
 Segment s3;
-int cols, rows;
+int $cols, $rows;
 ArrayList<Segment> segments = new ArrayList<Segment>();
 ArrayList<Segment> list = new ArrayList<Segment>();
 // *************************************************************************************************
@@ -19,7 +19,7 @@ ArrayList<Segment> list = new ArrayList<Segment>();
 // *************************************************************************************************
 void drawRandom() {
    //show first row of ArrayList
-  for (int i = 0; i<cols*rows; i++) {
+  for (int i = 0; i<$cols*$rows; i++) {
     float angle;
     //angle = map(mouseX, 0, width, 0, PI/2);
     float r = random(0,1);
@@ -28,7 +28,7 @@ void drawRandom() {
     } else {
       angle = 0;
     }
-    segments.get(i).changeAngle(angle);
+    segments.get(i).setAngle(angle);
     segments.get(i).show(); 
   }
 }
@@ -43,21 +43,26 @@ void setup() {
   rectMode(CORNER);
   stroke(0);
   strokeWeight(2);
-  noLoop();
+  //noLoop();
 
-  cols = width/$gridWidth;
-  rows = height/$gridWidth;
+  $cols = width/$gridWidth;
+  $rows = height/$gridWidth;
  
   // fill up segments ArrayList
-  for (int i = 0; i<cols; i++) {
-   for (int j = 0; j<rows; j++){
-    segments.add(new Segment(0+$gridWidth*j,0+$gridWidth*i)); 
-   }
-  }
+  //for (int i = 0; i<cols; i++) {
+  // for (int j = 0; j<rows; j++){
+  //  segments.add(new Segment(0+$gridWidth*j,0+$gridWidth*i)); 
+  // }
+  //}
+  //drawGrid($gridWidth);
+  fillSegments();
+  topLeft();
+  showSegments();
+  
     
     // TESTING
     // ********************************************************
-    println("rows: "+ rows + " cols: "+cols);
+    println("rows: "+ $rows + " cols: "+$cols);
     // ********************************************************
 }
 
@@ -67,13 +72,8 @@ void setup() {
 // Draw
 // *************************************************************************************************
 void draw() {
-  background(255);
-  if(grid) { drawGrid($gridWidth); } // toggle with 'g' key
+  //background(255);
+  //if(grid) { drawGrid($gridWidth); } // toggle with 'g' key
 
- 
-  if(looping) {
-   drawRandom();
-   noLoop();
-  }
  
 }
