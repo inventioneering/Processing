@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 20; //10, 20, 30, 50 for (600,600) canvas size
+int $gridWidth = 100; //10, 20, 30, 50 for (600,600) canvas size
 boolean grid = false;
 boolean debug = false;
 boolean looping = false;
@@ -55,7 +55,9 @@ void setup() {
   // }
   //}
   //drawGrid($gridWidth);
-  fillSegments();
+  //fillSegments();
+  patternAll();
+ 
   
   
     

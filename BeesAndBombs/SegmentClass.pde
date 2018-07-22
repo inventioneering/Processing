@@ -48,6 +48,14 @@ class Segment
     return this.startAngle;  
   }
   
+  int getStartAngleBool() {
+    if (this.startAngle > (PI/3)) {
+      return 1; // learning right
+    } else {
+      return 0; // not leaning right
+    }
+  }
+  
  
   
   float getLength(float angle) {

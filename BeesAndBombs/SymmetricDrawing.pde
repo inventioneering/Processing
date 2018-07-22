@@ -14,7 +14,7 @@ void fillSegments() {
   }
 }
 
-// helper function ... deprecated?
+// helper function 
 boolean randomAngle() {
   int p = int(random(0,2)); // random value 0 or 1
   if(p == 1) {
