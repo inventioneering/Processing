@@ -94,6 +94,12 @@ void showSegments() {
   }
 }
 
+void showSegmentsEnd() {
+   for (int i = 0; i<$cols*$rows; i++) {
+    segments.get(i).showEnd();
+  }
+}
+
 
 
 // run all the parts.

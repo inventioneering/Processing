@@ -7,7 +7,7 @@ class Segment
   PVector center;
   float startAngle;
   //float currentAngle; // will use this when we start animating
-  //float endAngle; // will use this when we start animating
+  float endAngle; // will use this when we start animating
   float newLength;
   boolean isEmpty;
   
@@ -19,7 +19,7 @@ class Segment
     center = new PVector(x+p,y+p);
     startAngle = 0; 
     //currentAngle = startAngle;
-    //endAngle = startAngle;
+    endAngle = startAngle;
     newLength = segmentLength;
     isEmpty = true;
   }
@@ -86,6 +86,14 @@ class Segment
      }
     }
     
+    void setEndAngle(boolean t) {
+     if (t) {
+      endAngle = PI/2; // "leaning"
+     } else {
+      endAngle = 0;  // not "leaning"
+     }
+    }
+    
     void setRandomAngle() {
       float p = random(0,1);
       if (p < 0.5) {
@@ -102,6 +110,21 @@ class Segment
       pushMatrix();
       translate(center.x,center.y); // move to center + 1/2 line length
       rotate(startAngle);
+      line(-p,-p,p,p);
+      popMatrix();
+      if(debug) {
+        fill(255,0,0);
+        ellipse(center.x,center.y,5,5);
+      }
+    }
+    
+    void showEnd() {
+      float l = getLength(endAngle);
+      float k = (segmentLength/sqrt(2));
+      float p = round((l*k)/2);
+      pushMatrix();
+      translate(center.x,center.y); // move to center + 1/2 line length
+      rotate(endAngle);
       line(-p,-p,p,p);
       popMatrix();
       if(debug) {
