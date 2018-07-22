@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 50; //10, 20, 30, 50 for (600,600) canvas size
+int $gridWidth = 20; //10, 20, 30, 50 for (600,600) canvas size
 boolean grid = false;
 boolean debug = false;
 boolean looping = false;
@@ -33,6 +33,39 @@ void drawRandom() {
   }
 }
 
+// fill segments with default Segment objects. Default constructor sets this.startAngle to -1
+// we will use this value as a check in subsequent steps.
+void fillSegments() {
+  for (int row = 0; row<$rows; row++) {
+    for (int col = 0; col<$cols; col++) {
+      segments.add(new Segment(0+$gridWidth*col, 0+$gridWidth*row));
+    }
+  }
+}
+
+void showSegments(String s) {
+  for (int i = 0; i<$cols*$rows; i++) {
+    if (s == "start") {
+      segments.get(i).show();
+    } else {
+      segments.get(i).showEnd();
+    }
+  }
+}
+
+//// show all segments ArrayList
+//void showSegments() {
+//  for (int i = 0; i<$cols*$rows; i++) {
+//    segments.get(i).show();
+//  }
+//}
+
+//void showSegmentsEnd() {
+//   for (int i = 0; i<$cols*$rows; i++) {
+//    segments.get(i).showEnd();
+//  }
+//}
+
 
 // Setup
 // *************************************************************************************************
@@ -48,12 +81,6 @@ void setup() {
   $cols = width/$gridWidth;
   $rows = height/$gridWidth;
  
-  // fill up segments ArrayList
-  //for (int i = 0; i<cols; i++) {
-  // for (int j = 0; j<rows; j++){
-  //  segments.add(new Segment(0+$gridWidth*j,0+$gridWidth*i)); 
-  // }
-  //}
   //drawGrid($gridWidth);
   fillSegments();
  // patternAll();
@@ -78,10 +105,10 @@ void draw() {
 
   // if looping
   if (looping) {
-    generateNewImage();
-    showSegments();
-    //mapEndPattern();
-    //showSegmentsEnd();
+    //generateNewImage();
+   // showSegments();
+    mapPattern("end");
+    showSegments("start");
   }
  
 }

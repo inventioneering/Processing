@@ -1,5 +1,6 @@
 // assumes: 
-// 1. global Intlist named pattern exists
+// 1. global Intlist named pattern exists... this is being deprecated... You can use makePattern() to generate new pattern
+// no global required.
 IntList pattern;
 
 // 2. global $gridWidth exists and has been initialized to an even number
