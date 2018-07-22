@@ -1,14 +1,11 @@
-// assumes: 
-// 1. global Intlist named pattern exists... this is being deprecated... You can use makePattern() to generate new pattern
-// no global required.
-//IntList pattern;
-
-// 2. global $gridWidth exists and has been initialized to an even number
-// 3. globals $rows and $cols exist
-// 4. $rows == $cols and they are an even number
+// Assumes:
+// 1. global $gridWidth exists and has been initialized to an even number
+// 2. globals $rows and $cols exist
+// 3. $rows == $cols and they are an even number
 
 
-// helper function
+// helper functions
+// *************************************************************************************************
 int randomAngleInt() {
   int p = int(random(0,2)); // random value 0 or 1
   if(p == 1) {
@@ -18,7 +15,8 @@ int randomAngleInt() {
   }
 }
 
-
+// make pattern
+// *************************************************************************************************
 IntList makePattern() {
   // create empty pattern IntList
   IntList p = new IntList();
@@ -51,7 +49,7 @@ IntList makePattern() {
   
   // top half
   for (int row = 0; row<($rows/2); row++) {
-    int distBetween = 1;                        // set the "offset" between values across L.O.S.
+    int distBetween = 1;  // set the "offset" between values across L.O.S.
     for (int col = ($cols/2); col<$cols; col++) {
       int index = col+(row*$cols);
       int mirrorIndex = index - distBetween;
@@ -85,21 +83,38 @@ IntList makePattern() {
 }
 
 
-//// show all pattern elements ... deprecated
-//void showPattern() {
-//  for(int row = 0; row<$rows; row++) {
-//    for(int col = 0; col<$cols; col++) {
-//      int index = col + (row*$cols);
-//      print(pattern.get(index)+" ");
-//    }
-//    println();
-//  }
-//}
-
-//// run all the parts... deprecated
-//void patternAll() {
-//  println("----------------- Start Pattern -----------------");
-//  makePattern();
-//  showPattern();
-//  println("----------------- End Pattern -----------------");
-//}
+// Mapping functions
+// *************************************************************************************************
+void mapPattern(String s) {
+  IntList pat = makePattern(); // generate new pattern and hold it.
+  
+  if (s == "start") {
+    for(int row = 0; row<$rows; row++) {
+      for(int col = 0; col<$cols; col++) {
+        int index = col + (row*$cols);
+        if(pat.get(index) == 1) { // learning right
+          segments.get(index).setStartAngle(true);
+        } else { // leaning left
+          segments.get(index).setStartAngle(false);
+        }
+      }
+    }
+    println("mapped start pattern");
+    return;
+  } 
+  
+  if (s == "end") {
+    for(int row = 0; row<$rows; row++) {
+      for(int col = 0; col<$cols; col++) {
+        int index = col + (row*$cols);
+        if(pat.get(index) == 1) { // learning right
+          segments.get(index).setEndAngle(true);
+        } else { // leaning left
+          segments.get(index).setEndAngle(false);
+        }
+      }
+    }
+  }
+  println("mapped end pattern");
+  return;
+}

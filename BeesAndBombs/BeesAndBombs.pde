@@ -9,6 +9,8 @@ boolean looping = false;
 int $cols, $rows;
 ArrayList<Segment> segments = new ArrayList<Segment>();
 String $showing;
+float $startTime;
+float $currentTime;
 // *************************************************************************************************
 
 
@@ -58,13 +60,13 @@ void showSegments(String s) {
 // Setup
 // *************************************************************************************************
 void setup() {
+  $startTime = millis(); // start timer
   size(600, 600);
   background(255);
   smooth(8);
   rectMode(CORNER);
   stroke(0);
   strokeWeight(2);
-  noLoop();
 
   $cols = width/$gridWidth;
   $rows = height/$gridWidth;
@@ -73,6 +75,7 @@ void setup() {
   fillSegments();
   mapPattern("start");
   mapPattern("end");
+  $showing = "start";
 
   // TESTING
   // ***********************************************************************************************
@@ -80,15 +83,26 @@ void setup() {
   // ***********************************************************************************************
 }
 
-
+// clunky way to switch, rely on $global state. Eew.
+String switchDrawing() {
+  background(255);
+  //drawGrid($gridWidth);
+  if ($showing == "start") {
+    return "end"; 
+  } else {
+    return "start";
+  }
+}
 
 // Draw
 // *************************************************************************************************
 void draw() {
-  background(255);
-  drawGrid($gridWidth);
-
-  $showing = "start";
+  $currentTime = millis(); // get current time since start
+  
+  if ($currentTime > $startTime + 800) { // after two seconds, switch
+    $showing = switchDrawing();
+    $startTime = $currentTime;
+  } 
   showSegments($showing);
   
 }
