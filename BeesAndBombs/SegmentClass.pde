@@ -3,11 +3,10 @@ class Segment
   // data  
   // *************************************************************************************************
   int segmentLength;
-  // use "static" keyword to make class variable
   PVector center;
   float startAngle;
-  //float currentAngle; // will use this when we start animating
-  float endAngle; // will use this when we start animating
+  float currentAngle; // track angle while animating
+  float endAngle; 
   float newLength;
   boolean isEmpty;
   
@@ -18,13 +17,13 @@ class Segment
     float p = segmentLength/2;
     center = new PVector(x+p,y+p);
     startAngle = 0; 
-    //currentAngle = startAngle;
+    currentAngle = startAngle;
     endAngle = startAngle;
     newLength = segmentLength;
     isEmpty = true;
   }
   
-  //Segment(int x, int y, boolean isLeft) {
+  //Segment(int x, int y, boolean isLeft) {   // deprecate?
   //  segmentLength = $gridWidth;
   //  float p = segmentLength/2;
   //  center = new PVector(x+p,y+p);
@@ -44,8 +43,18 @@ class Segment
     return isEmpty; 
   }
   
+  // Getters
+  // *************************************************************************************************
   float getStartAngle() {
     return this.startAngle;  
+  }
+  
+   float getEndAngle() {
+    return this.endAngle;  
+  }
+  
+   float getCurrentAngle() {
+    return this.currentAngle;  
   }
   
   int getStartAngleBool() {
@@ -56,23 +65,16 @@ class Segment
     }
   }
   
- 
-  
   float getLength(float angle) {
     //https://www.desmos.com/calculator/mu1snong2u
     return 0.6714*angle*angle-1.0548*angle+sqrt(2);
   }
+  // End Getters
+  // *************************************************************************************************
   
-  // int getLength() {
-  //   return this.segmentLength; 
-  // }
-
-  //PVector getCenter() {
-  //  return this.center; 
-  //}
 
 
-  // methods
+  // Setters
   // *************************************************************************************************
     void setAngle(float _angle) {
       startAngle = _angle;
@@ -81,8 +83,10 @@ class Segment
     void setStartAngle(boolean t) {
      if (t) {
       startAngle = PI/2; // "leaning"
+      currentAngle = PI/2; // "leaning"
      } else {
       startAngle = 0;  // not "leaning"
+      currentAngle = 0;  // not "leaning"
      }
     }
     
@@ -102,14 +106,34 @@ class Segment
        startAngle = PI/2; // right 
       }
     }
+    // End Setters
+    // *************************************************************************************************
 
-    void show() {
+
+    // Display methods
+    // *************************************************************************************************
+    void showStart() {
       float l = getLength(startAngle);
       float k = (segmentLength/sqrt(2));
       float p = round((l*k)/2);
       pushMatrix();
       translate(center.x,center.y); // move to center + 1/2 line length
       rotate(startAngle);
+      line(-p,-p,p,p);
+      popMatrix();
+      if($debug) {
+        fill(255,0,0);
+        ellipse(center.x,center.y,5,5);
+      }
+    }
+    
+     void showCurrent() {
+      float l = getLength(currentAngle);
+      float k = (segmentLength/sqrt(2));
+      float p = round((l*k)/2);
+      pushMatrix();
+      translate(center.x,center.y); // move to center + 1/2 line length
+      rotate(currentAngle);
       line(-p,-p,p,p);
       popMatrix();
       if($debug) {
@@ -132,6 +156,9 @@ class Segment
         ellipse(center.x,center.y,5,5);
       }
     }
+    
+    // End display methods
+    // *************************************************************************************************
   
  
 }

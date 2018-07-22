@@ -1,13 +1,13 @@
 void keyPressed() {
- //if(key == 'g') {
- // grid = !grid; 
- // if(grid) {
- //   printD("grid",true);
- // } else {
- //   printD("grid",false); 
- // }
- // //drawGrid($gridWidth);
- //}
+ if(key == 'g') {
+  $grid = !$grid; 
+  if($grid) {
+    printD("grid",true);
+  } else {
+    printD("grid",false); 
+  }
+  //drawGrid($gridWidth);
+ }
 
  
  // deprecated

@@ -3,3 +3,4 @@
 // add a "mat" border around drawing
 // save states to disk.
 // generate .gif as "recording" ... see original for tips
+// clean up unused function in SegmentClass
