@@ -48,6 +48,8 @@ class Segment
     return this.startAngle;  
   }
   
+ 
+  
   float getLength(float angle) {
     //https://www.desmos.com/calculator/mu1snong2u
     return 0.6714*angle*angle-1.0548*angle+sqrt(2);

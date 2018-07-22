@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 50; //10, 20, 30, 50 for (600,600) canvas size
+int $gridWidth = 20; //10, 20, 30, 50 for (600,600) canvas size
 boolean grid = false;
 boolean debug = false;
 boolean looping = false;
@@ -43,7 +43,7 @@ void setup() {
   rectMode(CORNER);
   stroke(0);
   strokeWeight(2);
-  //noLoop();
+  noLoop();
 
   $cols = width/$gridWidth;
   $rows = height/$gridWidth;
@@ -56,8 +56,7 @@ void setup() {
   //}
   //drawGrid($gridWidth);
   fillSegments();
-  topLeft();
-  showSegments();
+  
   
     
     // TESTING
@@ -72,8 +71,13 @@ void setup() {
 // Draw
 // *************************************************************************************************
 void draw() {
-  //background(255);
+  background(255);
   //if(grid) { drawGrid($gridWidth); } // toggle with 'g' key
 
+  // if looping
+  if (looping) {
+    generateNewImage();
+    showSegments();
+  }
  
 }
