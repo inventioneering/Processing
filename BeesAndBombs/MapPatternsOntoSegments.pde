@@ -12,6 +12,8 @@ void mapPattern(String s) {
         }
       }
     }
+    println("mapped start pattern");
+    return;
   } 
   
   if (s == "end") {
@@ -26,5 +28,6 @@ void mapPattern(String s) {
       }
     }
   }
-  
+  println("mapped end pattern");
+  return;
 }

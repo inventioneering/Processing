@@ -2,16 +2,13 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 20; //10, 20, 30, 50 for (600,600) canvas size
+int $gridWidth = 20; //10, 20, 30, 50 for(600,600) canvas size
 boolean grid = false;
 boolean debug = false;
 boolean looping = false;
-Segment s1;
-Segment s2;
-Segment s3;
 int $cols, $rows;
 ArrayList<Segment> segments = new ArrayList<Segment>();
-ArrayList<Segment> list = new ArrayList<Segment>();
+String $showing;
 // *************************************************************************************************
 
 
@@ -47,24 +44,15 @@ void showSegments(String s) {
   for (int i = 0; i<$cols*$rows; i++) {
     if (s == "start") {
       segments.get(i).show();
+      println("showing start");
     } else {
       segments.get(i).showEnd();
+      println("showing end");
     }
   }
 }
 
-//// show all segments ArrayList
-//void showSegments() {
-//  for (int i = 0; i<$cols*$rows; i++) {
-//    segments.get(i).show();
-//  }
-//}
 
-//void showSegmentsEnd() {
-//   for (int i = 0; i<$cols*$rows; i++) {
-//    segments.get(i).showEnd();
-//  }
-//}
 
 
 // Setup
@@ -83,17 +71,14 @@ void setup() {
  
   //drawGrid($gridWidth);
   fillSegments();
- // patternAll();
- 
-  
-  
-    
-    // TESTING
-    // ********************************************************
-    println("rows: "+ $rows + " cols: "+$cols);
-    // ********************************************************
-}
+  mapPattern("start");
+  mapPattern("end");
 
+  // TESTING
+  // ***********************************************************************************************
+  println("rows: "+ $rows + " cols: "+$cols);
+  // ***********************************************************************************************
+}
 
 
 
@@ -101,14 +86,9 @@ void setup() {
 // *************************************************************************************************
 void draw() {
   background(255);
-  //if(grid) { drawGrid($gridWidth); } // toggle with 'g' key
+  drawGrid($gridWidth);
 
-  // if looping
-  if (looping) {
-    //generateNewImage();
-   // showSegments();
-    mapPattern("end");
-    showSegments("start");
-  }
- 
+  $showing = "start";
+  showSegments($showing);
+  
 }

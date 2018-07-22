@@ -1,45 +1,60 @@
-void keyPressed() {
- if(key == 'g') {
-  grid = !grid; 
-  if(grid) {
-    printD("grid",true);
-  } else {
-    printD("grid",false); 
-  }
-  //drawGrid($gridWidth);
- }
+//void keyPressed() {
+// //if(key == 'g') {
+// // grid = !grid; 
+// // if(grid) {
+// //   printD("grid",true);
+// // } else {
+// //   printD("grid",false); 
+// // }
+// // //drawGrid($gridWidth);
+// //}
  
- if(key == 'd') {
-  debug = !debug;
-  if(debug) {
-    printD("debug",true);
-  } else {
-    printD("debug",false); 
-  }
- }
+//  if(key == 's') {
+//     background(255);
+//     // showSegments("start");
+//      $showing = "start";
+//      println("$showing: "+$showing);
+//      key = 'z';
+//    }
+//    if(key == 'e') {
+//      //showSegments("end");
+//      $showing = "end";
+//      println("$showing: "+$showing);
+//      key = 'z';
+//    }
  
- if(key == 'l') {
-  looping = !looping;
-  if(looping) {
-   loop(); 
-  } else {
-   noLoop(); 
-  }
- }
+// if(key == 'd') {
+//  debug = !debug;
+//  if(debug) {
+//    printD("debug",true);
+//  } else {
+//    printD("debug",false); 
+//  }
+// }
  
- if(key == 'r') {
-  background(255);
-  loop();
-  drawRandom(); 
-  noLoop();
-  //loop();
- }
-}
+// //if(key == 'l') {
+// // looping = !looping;
+// // if(looping) {
+// //  loop(); 
+// // } else {
+// //  noLoop(); 
+// // }
+// //}
+ 
+// //if(key == 'r') {
+// // background(255);
+// // loop();
+// // drawRandom(); 
+// // noLoop();
+// // //loop();
+// //}
+//}
 
-void printD(String m, boolean t) {
-  if (t) {
-    println(m + ": on");
-  } else {
-    println(m + ": off");
-  }
-}
+//// Helper functions
+//void printD(String m, boolean t) {
+//  if (t) {
+//    println(m + ": on");
+//  } else {
+//    println(m + ": off");
+//  }
+//}

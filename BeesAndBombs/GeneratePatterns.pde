@@ -1,7 +1,7 @@
 // assumes: 
 // 1. global Intlist named pattern exists... this is being deprecated... You can use makePattern() to generate new pattern
 // no global required.
-IntList pattern;
+//IntList pattern;
 
 // 2. global $gridWidth exists and has been initialized to an even number
 // 3. globals $rows and $cols exist
@@ -80,26 +80,26 @@ IntList makePattern() {
       }
       distBetween += 2;
     }
-    pattern = p; // overwrite global "pattern" IntList
+    //pattern = p; // overwrite global "pattern" IntList
     return p; // return IntList for use in mapping
 }
 
 
-//// show all pattern elements
-void showPattern() {
-  for(int row = 0; row<$rows; row++) {
-    for(int col = 0; col<$cols; col++) {
-      int index = col + (row*$cols);
-      print(pattern.get(index)+" ");
-    }
-    println();
-  }
-}
+//// show all pattern elements ... deprecated
+//void showPattern() {
+//  for(int row = 0; row<$rows; row++) {
+//    for(int col = 0; col<$cols; col++) {
+//      int index = col + (row*$cols);
+//      print(pattern.get(index)+" ");
+//    }
+//    println();
+//  }
+//}
 
-//// run all the parts.
-void patternAll() {
-  println("----------------- Start Pattern -----------------");
-  makePattern();
-  showPattern();
-  println("----------------- End Pattern -----------------");
-}
+//// run all the parts... deprecated
+//void patternAll() {
+//  println("----------------- Start Pattern -----------------");
+//  makePattern();
+//  showPattern();
+//  println("----------------- End Pattern -----------------");
+//}
