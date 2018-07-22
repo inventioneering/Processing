@@ -2,15 +2,17 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 20; //10, 20, 30, 50 for(600,600) canvas size
-boolean grid = false;
-boolean debug = false;
-boolean looping = false;
+int $gridWidth = 100; //10, 20, 30, 50 for(600,600) canvas size
+boolean $grid = false;
+boolean $debug = false;
+boolean $looping = false;
 int $cols, $rows;
-ArrayList<Segment> segments = new ArrayList<Segment>();
+ArrayList<Segment> $segments = new ArrayList<Segment>();
 String $showing;
 float $startTime;
 float $currentTime;
+int $frameRate = 10;
+int $strokeWeight = 3;
 // *************************************************************************************************
 
 
@@ -27,8 +29,8 @@ void drawRandom() {
     } else {
       angle = 0;
     }
-    segments.get(i).setAngle(angle);
-    segments.get(i).show(); 
+    $segments.get(i).setAngle(angle);
+    $segments.get(i).show(); 
   }
 }
 
@@ -37,7 +39,7 @@ void drawRandom() {
 void fillSegments() {
   for (int row = 0; row<$rows; row++) {
     for (int col = 0; col<$cols; col++) {
-      segments.add(new Segment(0+$gridWidth*col, 0+$gridWidth*row));
+      $segments.add(new Segment(0+$gridWidth*col, 0+$gridWidth*row));
     }
   }
 }
@@ -45,11 +47,11 @@ void fillSegments() {
 void showSegments(String s) {
   for (int i = 0; i<$cols*$rows; i++) {
     if (s == "start") {
-      segments.get(i).show();
-      println("showing start");
+      $segments.get(i).show();
+      if ($debug) { println("showing start"); }
     } else {
-      segments.get(i).showEnd();
-      println("showing end");
+      $segments.get(i).showEnd();
+      if ($debug) { println("showing end"); }
     }
   }
 }
@@ -66,7 +68,8 @@ void setup() {
   smooth(8);
   rectMode(CORNER);
   stroke(0);
-  strokeWeight(2);
+  strokeWeight($strokeWeight);
+  frameRate($frameRate);
 
   $cols = width/$gridWidth;
   $rows = height/$gridWidth;
@@ -97,6 +100,7 @@ String switchDrawing() {
 // Draw
 // *************************************************************************************************
 void draw() {
+  background(255);
   $currentTime = millis(); // get current time since start
   
   if ($currentTime > $startTime + 800) { // after two seconds, switch

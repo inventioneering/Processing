@@ -93,9 +93,9 @@ void mapPattern(String s) {
       for(int col = 0; col<$cols; col++) {
         int index = col + (row*$cols);
         if(pat.get(index) == 1) { // learning right
-          segments.get(index).setStartAngle(true);
+          $segments.get(index).setStartAngle(true);
         } else { // leaning left
-          segments.get(index).setStartAngle(false);
+          $segments.get(index).setStartAngle(false);
         }
       }
     }
@@ -108,9 +108,9 @@ void mapPattern(String s) {
       for(int col = 0; col<$cols; col++) {
         int index = col + (row*$cols);
         if(pat.get(index) == 1) { // learning right
-          segments.get(index).setEndAngle(true);
+          $segments.get(index).setEndAngle(true);
         } else { // leaning left
-          segments.get(index).setEndAngle(false);
+          $segments.get(index).setEndAngle(false);
         }
       }
     }

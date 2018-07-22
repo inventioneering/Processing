@@ -112,7 +112,7 @@ class Segment
       rotate(startAngle);
       line(-p,-p,p,p);
       popMatrix();
-      if(debug) {
+      if($debug) {
         fill(255,0,0);
         ellipse(center.x,center.y,5,5);
       }
@@ -127,7 +127,7 @@ class Segment
       rotate(endAngle);
       line(-p,-p,p,p);
       popMatrix();
-      if(debug) {
+      if($debug) {
         fill(255,0,0);
         ellipse(center.x,center.y,5,5);
       }
