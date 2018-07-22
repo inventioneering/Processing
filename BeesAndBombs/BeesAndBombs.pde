@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 100; //10, 20, 30, 50 for(600,600) canvas size
+int $gridWidth = 50; //10, 20, 30, 50 for(600,600) canvas size
 boolean $grid = true;
 boolean $debug = false;
 boolean $looping = false;
@@ -11,7 +11,7 @@ ArrayList<Segment> $segments = new ArrayList<Segment>();
 String $showing;
 float $startTime;
 float $currentTime;
-int $fRate = 10;
+int $fRate = 20;
 int $strokeWeight = 3;
 // *************************************************************************************************
 
@@ -95,6 +95,7 @@ void draw() {
   //  $showing = switchDrawing();
   //  $startTime = $currentTime;
   //} 
+  updateCurrent();
   $showing = "current";
   showSegments($showing);
   

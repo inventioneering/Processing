@@ -76,16 +76,30 @@ class Segment
 
   // Setters
   // *************************************************************************************************
-    void setAngle(float _angle) {
-      startAngle = _angle;
+    //void setAngle(float _angle) {  // deprecated?
+    //  startAngle = _angle;
+    //}
+    
+    void setCurrentAngle(float a) {
+      currentAngle = a;
+    }
+    
+    void incrementCurrentAngle(float a) {
+      currentAngle += a;
     }
     
     void setStartAngle(boolean t) {
      if (t) {
       startAngle = PI/2; // "leaning"
-      currentAngle = PI/2; // "leaning"
      } else {
       startAngle = 0;  // not "leaning"
+     }
+    }
+    
+     void setCurrentAngle(boolean t) {
+     if (t) {
+      currentAngle = PI/2; // "leaning"
+     } else {
       currentAngle = 0;  // not "leaning"
      }
     }

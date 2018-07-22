@@ -94,8 +94,10 @@ void mapPattern(String s) {
         int index = col + (row*$cols);
         if(pat.get(index) == 1) { // learning right
           $segments.get(index).setStartAngle(true);
+          $segments.get(index).setCurrentAngle(true);
         } else { // leaning left
           $segments.get(index).setStartAngle(false);
+          $segments.get(index).setCurrentAngle(false);
         }
       }
     }
