@@ -75,17 +75,17 @@ class Segment
     }
   }
   
-  boolean shouldContinueAnimating() { // no idea if this is gonna work...
-    float distFromEnd = abs(this.endAngle - this.currentAngle);
-    float distFromStart = abs(this.startAngle - this.currentAngle);
+  //boolean shouldContinueAnimating() { // no idea if this is gonna work...
+  //  float distFromEnd = abs(this.endAngle - this.currentAngle);
+  //  float distFromStart = abs(this.startAngle - this.currentAngle);
     
     
-    if () {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  //  if () {
+  //    return true;
+  //  } else {
+  //    return false;
+  //  }
+  //}
   
   // this doesn't make sense! This angle won't just be a "1" or "0"
   //int getCurrentAngleBool() {  

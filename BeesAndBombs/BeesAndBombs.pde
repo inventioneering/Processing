@@ -90,14 +90,14 @@ String switchDrawing() {
 void draw() {
   background(255);
   if($grid) { drawGrid($gridWidth); };
-  //$currentTime = millis(); // get current time since start
+  $currentTime = millis(); // get current time since start
   
-  //if ($currentTime > $startTime + 800) { // after two seconds, switch
-  //  $showing = switchDrawing();
-  //  $startTime = $currentTime;
-  //} 
-  updateCurrent();
-  $showing = "current";
+  if ($currentTime > $startTime + 800) { // after two seconds, switch
+    $showing = switchDrawing();
+    $startTime = $currentTime;
+  } 
+  //updateCurrent();
+ // $showing = "current";
   showSegments($showing);
   
 }
