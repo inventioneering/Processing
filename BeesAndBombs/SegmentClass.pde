@@ -8,7 +8,12 @@ class Segment
   float currentAngle; // track angle while animating
   float endAngle; 
   float newLength;
-  float error = 0.0001; 
+  float error; 
+  boolean animating;
+  int totalFrames,currentFrame;
+  int animationDuration;  // in seconds
+  float angleIncrement;
+  float angleDifference;
   
   // constructor 
   // *************************************************************************************************
@@ -19,13 +24,13 @@ class Segment
     startAngle = 0; 
     currentAngle = startAngle;
     endAngle = startAngle;
-    newLength = segmentLength;
+    newLength = segmentLength; 
   }
 
   
   // helper methods
   // *************************************************************************************************
-
+  
   
   // Getters
   // *************************************************************************************************
@@ -67,11 +72,59 @@ class Segment
   
 
 
+  // animation
+  // *************************************************************************************************
+    void startAnimating() {    
+      this.animating = true;
+     
+      // figure out where to put this stuff...
+      error = 0.001;
+      animationDuration = 2;
+      animating = false;
+      currentFrame = 0;
+      totalFrames = $fRate * animationDuration;
+      angleDifference = (endAngle - startAngle);
+      angleIncrement = (angleDifference/totalFrames);
+      
+      if ($debug) { println("start animating"); }
+    }
+    
+    void stopAnimating() {    
+       this.animating = false;
+       if ($debug) { println("stop animating"); }
+    }
+     
+   void updateAngle() {
+     // if ($debug) { println("upateAngle() called"); }
+      if (animating) {
+        // check to see if we should stop
+        if(currentFrame <= totalFrames) {
+          currentAngle += angleIncrement;
+          currentFrame++;
+        } else {
+          currentFrame = 0;
+          stopAnimating();
+        }
+        if ($debug) 
+        { 
+          println("frame#" + currentFrame + 
+                  " angleInc: " + angleIncrement + 
+                  " angleDiff: " + angleDifference + 
+                  " sA: " + startAngle + 
+                  " cA:" + currentAngle + 
+                  " eA: " + endAngle
+          ); 
+        }
+      }
+    }
+    
+
   // Setters
   // *************************************************************************************************
     void setCurrentAngle(float a) {
       currentAngle = a;
     }
+    
     
     void incrementCurrentAngle(float a) {
       this.currentAngle = this.currentAngle + a;
@@ -143,6 +196,7 @@ class Segment
         fill(255,0,0);
         ellipse(center.x,center.y,5,5);
       }
+      
     }
     
     void showEnd() {

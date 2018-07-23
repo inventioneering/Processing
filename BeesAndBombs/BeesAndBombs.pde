@@ -89,16 +89,19 @@ String switchDrawing() {
 // *************************************************************************************************
 void draw() {
   background(255);
-  if($grid) { drawGrid($gridWidth); };
+  //if($grid) { drawGrid($gridWidth); };
   
-  // flip back and forth
-  $currentTime = millis(); // get current time since start
-  if ($currentTime > $startTime + 600) { // after two seconds, switch
-    $showing = switchDrawing();
-    $startTime = $currentTime;
-  } 
+  //// flip back and forth
+  //$currentTime = millis(); // get current time since start
+  //if ($currentTime > $startTime + 600) { // after two seconds, switch
+  //  $showing = switchDrawing();
+  //  $startTime = $currentTime;
+  //} 
   //updateCurrent();
- // $showing = "current";
-  showSegments($showing);
+  //$showing = "current";
+  //$segments.get(0).startAnimating();
+  $segments.get(0).updateAngle();
+  $segments.get(0).showCurrent();
+ // showSegments($showing);
   
 }

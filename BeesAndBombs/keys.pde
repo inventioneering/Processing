@@ -8,6 +8,14 @@ void keyPressed() {
   }
   //drawGrid($gridWidth);
  }
+ 
+ if(key == 'a') {
+   if($segments.get(0).animating == true) {
+     $segments.get(0).stopAnimating();
+   } else {
+     $segments.get(0).startAnimating();
+   }
+ }
 
  
  // deprecated
