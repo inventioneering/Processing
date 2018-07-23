@@ -9,6 +9,7 @@ class Segment
   float endAngle; 
   float newLength;
   boolean isEmpty;
+  float error = 0.005; 
   
   // constructor 
   // *************************************************************************************************
@@ -58,7 +59,25 @@ class Segment
   }
   
   int getStartAngleBool() {
-    if (this.startAngle > (PI/3)) {
+    if ( ((PI/2)-error) < this.startAngle && this.startAngle < ((PI/2)+error) ) {
+      return 1; // learning right
+    } else {
+      return 0; // not leaning right
+    }
+  }
+  
+  int getEndAngleBool() {
+     if ( ((PI/2)-error) < this.endAngle && this.endAngle < ((PI/2)+error) ) {
+    // if (this.endAngle > (PI/3)) {
+      return 1; // learning right
+    } else {
+      return 0; // not leaning right
+    }
+  }
+  
+  int getCurrentAngleBool() {
+     if ( ((PI/2)-error) < this.currentAngle && this.currentAngle < ((PI/2)+error) ) {
+     //if (this.currentAngle >= (PI/2)) { // changed the "check" I'm really struggling with floating point math and how to get equivalence
       return 1; // learning right
     } else {
       return 0; // not leaning right

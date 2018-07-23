@@ -4,7 +4,7 @@
 // *************************************************************************************************
 int $gridWidth = 50; //10, 20, 30, 50 for(600,600) canvas size
 boolean $grid = true;
-boolean $debug = false;
+boolean $debug = true;
 boolean $looping = false;
 int $cols, $rows;
 ArrayList<Segment> $segments = new ArrayList<Segment>();
@@ -32,13 +32,13 @@ void showSegments(String s) {
   for (int i = 0; i<$cols*$rows; i++) {
     if (s == "start") {
       $segments.get(i).showStart();
-      if ($debug) { println("showing start"); }
+      //if ($debug) { println("showing start"); }
     } else if (s == "current") {
        $segments.get(i).showCurrent();
-       if ($debug) { println("showing start"); }
+       //if ($debug) { println("showing start"); }
     } else {
       $segments.get(i).showEnd();
-      if ($debug) { println("showing end"); }
+     // if ($debug) { println("showing end"); }
     }
   }
 }
