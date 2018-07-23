@@ -90,9 +90,10 @@ String switchDrawing() {
 void draw() {
   background(255);
   if($grid) { drawGrid($gridWidth); };
-  $currentTime = millis(); // get current time since start
   
-  if ($currentTime > $startTime + 800) { // after two seconds, switch
+  // flip back and forth
+  $currentTime = millis(); // get current time since start
+  if ($currentTime > $startTime + 600) { // after two seconds, switch
     $showing = switchDrawing();
     $startTime = $currentTime;
   } 

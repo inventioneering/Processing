@@ -8,7 +8,6 @@ class Segment
   float currentAngle; // track angle while animating
   float endAngle; 
   float newLength;
-  boolean isEmpty;
   float error = 0.0001; 
   
   // constructor 
@@ -21,28 +20,12 @@ class Segment
     currentAngle = startAngle;
     endAngle = startAngle;
     newLength = segmentLength;
-    isEmpty = true;
   }
-  
-  //Segment(int x, int y, boolean isLeft) {   // deprecate?
-  //  segmentLength = $gridWidth;
-  //  float p = segmentLength/2;
-  //  center = new PVector(x+p,y+p);
-  //  if (isLeft) { // left
-  //    startAngle = 0;
-  //  } else if (!isLeft) { // right
-  //    startAngle = PI/2;
-  //  }
-  //  currentAngle = startAngle;
-  //  endAngle = startAngle;
-  //  newLength = segmentLength;
-  //}
+
   
   // helper methods
   // *************************************************************************************************
-  boolean isEmpty() {
-    return isEmpty; 
-  }
+
   
   // Getters
   // *************************************************************************************************
@@ -75,28 +58,6 @@ class Segment
     }
   }
   
-  //boolean shouldContinueAnimating() { // no idea if this is gonna work...
-  //  float distFromEnd = abs(this.endAngle - this.currentAngle);
-  //  float distFromStart = abs(this.startAngle - this.currentAngle);
-    
-    
-  //  if () {
-  //    return true;
-  //  } else {
-  //    return false;
-  //  }
-  //}
-  
-  // this doesn't make sense! This angle won't just be a "1" or "0"
-  //int getCurrentAngleBool() {  
-  //   if ( ((PI/2)-error) < this.currentAngle && this.currentAngle < ((PI/2)+error) ) {
-  //   //if (this.currentAngle >= (PI/2)) { // changed the "check" I'm really struggling with floating point math and how to get equivalence
-  //    return 1; // learning right
-  //  } else {
-  //    return 0; // not leaning right
-  //  }
-  //}
-  
   float getLength(float angle) {
     //https://www.desmos.com/calculator/mu1snong2u
     return 0.6714*angle*angle-1.0548*angle+sqrt(2);
@@ -108,10 +69,6 @@ class Segment
 
   // Setters
   // *************************************************************************************************
-    //void setAngle(float _angle) {  // deprecated?
-    //  startAngle = _angle;
-    //}
-    
     void setCurrentAngle(float a) {
       currentAngle = a;
     }
