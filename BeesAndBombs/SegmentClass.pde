@@ -76,7 +76,11 @@ class Segment
   }
   
   boolean shouldContinueAnimating() { // no idea if this is gonna work...
-    if (currentAngle != endAngle && currentAngle != startAngle) {
+    float distFromEnd = abs(this.endAngle - this.currentAngle);
+    float distFromStart = abs(this.startAngle - this.currentAngle);
+    
+    
+    if () {
       return true;
     } else {
       return false;
