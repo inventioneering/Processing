@@ -10,7 +10,7 @@ void animate() {
   float eA = a.getEndAngle();
   
   int sAB = a.getStartAngleBool();
-  int cAB = a.getCurrentAngleBool();
+  //int cAB = a.getCurrentAngleBool();
   int eAB = a.getEndAngleBool();
   
   //float sB = b.getStartAngle();
@@ -27,28 +27,47 @@ void animate() {
   //println("sC: "+ sC + " cC: "+cC+ " eC: "+eC);
 }
 
-boolean moveRequiredQ(Segment a) {
-  return a.getStartAngle() !=a.getEndAngle();
-}
+//boolean moveRequiredQ(Segment a) {
+//  return a.getCurrentAngleBool() !=a.getEndAngleBool();
+//}
 
 void updateCurrent() {  // should be an object method for SegmentClass
   // test on first element in $segments ArrayList<Segment>
+  Segment s = $segments.get(0);
   int duration = 2;                             // in seconds
   int totalFrames = $fRate*duration;
-  float sA = $segments.get(0).getStartAngle();
-  float eA = $segments.get(0).getEndAngle();
-  float angle = sA - eA;                          // flip if misbehaving
-  float angleIncrement = -1*(angle/totalFrames);  // split the distance between start and end into equal parts
+  float sA = s.getStartAngle();
+  float cA = s.getCurrentAngle();
+  float eA = s.getEndAngle();
+  boolean animating = false;
   
-  // update currentAngle
-  Segment s = $segments.get(0);
   int start = s.getStartAngleBool();
   int end = s.getEndAngleBool();
-  int current = s.getCurrentAngleBool();
+  //int current = s.getCurrentAngleBool();
+  
+  float angle = eA - sA;                          // not sure if correct... might be flipped?
+  float angleIncrement = (angle/totalFrames);     // split the distance between start and end into equal parts
+  
+   //println("-? " + "sA: " + sA + " cA: " + cA + " eA: "+ eA);
+   //println("? " + "s: " + start + " c: " + cA + " e: "+ end);
   if(start != end) {
-    if(current != end) { // should make sure we stop moving
-      $segments.get(0).incrementCurrentAngle(angleIncrement);
-      println("s: " + start + " c: " + current + " e: "+ current + " --MOVING--");
-    }
+    animating = true;
   }
+  
+  if(animating) {
+     println("--BEFORE-- " + "sA: " + sA + " cA: " + cA + " eA: "+ eA);
+     println("--BEFORE-- " + "s: " + start + " c: " + cA + " e: "+ end);
+    // $segments.get(0).incrementCurrentAngle(angleIncrement);
+    s.incrementCurrentAngle(angleIncrement); // looks like there is a pointer happening here...
+    println("Incremented by: " + angleIncrement);
+    cA = s.getCurrentAngle();
+   // current = s.getCurrentAngleBool();
+    println("--AFTER--" + "sA: " + sA + " cA: " + cA + " eA: "+ eA);
+    println("--AFTER--" + "s: " + start + " c: " + cA + " e: "+ end);
+    println();
+    if (!s.shouldContinueAnimating()) { animating = false; return; }
+  }
+
+  
+  
 }

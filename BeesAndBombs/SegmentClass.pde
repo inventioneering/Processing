@@ -9,7 +9,7 @@ class Segment
   float endAngle; 
   float newLength;
   boolean isEmpty;
-  float error = 0.005; 
+  float error = 0.0001; 
   
   // constructor 
   // *************************************************************************************************
@@ -75,14 +75,23 @@ class Segment
     }
   }
   
-  int getCurrentAngleBool() {
-     if ( ((PI/2)-error) < this.currentAngle && this.currentAngle < ((PI/2)+error) ) {
-     //if (this.currentAngle >= (PI/2)) { // changed the "check" I'm really struggling with floating point math and how to get equivalence
-      return 1; // learning right
+  boolean shouldContinueAnimating() { // no idea if this is gonna work...
+    if (currentAngle != endAngle && currentAngle != startAngle) {
+      return true;
     } else {
-      return 0; // not leaning right
+      return false;
     }
   }
+  
+  // this doesn't make sense! This angle won't just be a "1" or "0"
+  //int getCurrentAngleBool() {  
+  //   if ( ((PI/2)-error) < this.currentAngle && this.currentAngle < ((PI/2)+error) ) {
+  //   //if (this.currentAngle >= (PI/2)) { // changed the "check" I'm really struggling with floating point math and how to get equivalence
+  //    return 1; // learning right
+  //  } else {
+  //    return 0; // not leaning right
+  //  }
+  //}
   
   float getLength(float angle) {
     //https://www.desmos.com/calculator/mu1snong2u
@@ -104,7 +113,7 @@ class Segment
     }
     
     void incrementCurrentAngle(float a) {
-      currentAngle += a;
+      this.currentAngle = this.currentAngle + a;
     }
     
     void setStartAngle(boolean t) {
