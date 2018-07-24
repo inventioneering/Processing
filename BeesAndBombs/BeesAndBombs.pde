@@ -119,6 +119,5 @@ void draw() {
   
   animateSegments();
   showSegments("current");
-  
-  
+
 }
