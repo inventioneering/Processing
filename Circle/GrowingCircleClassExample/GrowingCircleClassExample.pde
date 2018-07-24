@@ -26,14 +26,11 @@ void draw()
    {
    pulsars.get(i).display();
    pulsars.get(i).pulse();
-   //pulsars.get(i).shrink();
    }
-
 }
 
 void mousePressed()
 {
-  
   // random red values
   randomColor = color(random(100,255),0,0);
   randomRadius = random(2,maxRadius);  // choose a radius from a range that makes the cirlces different
@@ -45,10 +42,9 @@ void mousePressed()
   // we need to keep track of the last one we put in the array list
   lastPulsar = pulsars.size()-1;
   
-  // grab the Pulsar object you just made, display it and pulse it.
+  // grab the Pulsar object you just made, pulse it and display it
+  pulsars.get(lastPulsar).pulse();
   pulsars.get(lastPulsar).display();
- // pulsars.get(lastPulsar).pulse();
-  pulsars.get(lastPulsar).shrink();
   
 }
 
@@ -99,20 +95,7 @@ class Pulsar
    //println("display");
   }
  
- // this is a function that allows me to quickly make the radius get bigger.
-  void grow()
-  {
-    changingRadius++;
-  }
-  
-  // this, like the growing radius function above allows me to make the raidus get smaller.  Both
-  // of these functions are kinda silly and probably unnecessary.
-  void shrink()
-  {
-    changingRadius--;
-    //println("secondRadius" + changingRadius);
-  }
-  
+
   // this is the most complex method.  It checks four cases and creates certain behavior based on
   // which case is true at any given time through the void draw() loop.
   void pulse()

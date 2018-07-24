@@ -2,9 +2,9 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 50; //10, 20, 30, 50 for(600,600) canvas size
-boolean $grid = true;
-boolean $debug = true;
+int $gridWidth = 20; //10, 20, 30, 50 for(600,600) canvas size
+boolean $grid = false;
+boolean $debug = false;
 boolean $looping = false;
 int $cols, $rows;
 ArrayList<Segment> $segments = new ArrayList<Segment>();
@@ -13,6 +13,7 @@ float $startTime;
 float $currentTime;
 int $fRate = 20;
 int $strokeWeight = 3;
+Segment $testSegment;
 // *************************************************************************************************
 
 
@@ -43,6 +44,12 @@ void showSegments(String s) {
   }
 }
 
+void animateSegments() {
+  for (int i = 0; i<$cols*$rows; i++) {
+    $segments.get(i).animate();
+  }
+}
+
 
 // Setup
 // *************************************************************************************************
@@ -70,8 +77,9 @@ void setup() {
   // ***********************************************************************************************
   println("rows: "+ $rows + " cols: "+$cols);
   println();
+  //$testSegment = $segments.get(0);
   // ***********************************************************************************************
-  //animate();
+ 
 }
 
 // clunky way to switch, rely on $global state. Eew.
@@ -85,19 +93,31 @@ String switchDrawing() {
   }
 }
 
+void rotateStartEnd() {
+  if($grid) { drawGrid($gridWidth); };
+ 
+  // flip back and forth
+  $currentTime = millis(); // get current time since start
+  if ($currentTime > $startTime + 600) { // after two seconds, switch
+    $showing = switchDrawing();
+    $startTime = $currentTime;
+  } 
+  showSegments($showing);
+}
+
 // Draw
 // *************************************************************************************************
 void draw() {
   background(255);
-  if($grid) { drawGrid($gridWidth); };
-  //$currentTime = millis(); // get current time since start
   
-  //if ($currentTime > $startTime + 800) { // after two seconds, switch
-  //  $showing = switchDrawing();
-  //  $startTime = $currentTime;
-  //} 
-  updateCurrent();
-  $showing = "current";
-  showSegments($showing);
+  $showing = "start";
+  //rotateStartEnd();
+  //showSegments($showing);
   
+  //$testSegment.animate();
+  //$testSegment.showCurrent();
+  
+  animateSegments();
+  showSegments("current");
+
 }
