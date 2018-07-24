@@ -10,11 +10,11 @@ void keyPressed() {
  }
  
  if(key == 'a') {
-   if($segments.get(0).animating == true) {
-     $segments.get(0).stopAnimating();
-   } else {
-     $segments.get(0).startAnimating();
+   // start animation
+   for (int i = 0; i<$rows*$cols; i++) {
+     $segments.get(i).startAnimation();
    }
+   //$testSegment.startAnimation();
  }
 
  

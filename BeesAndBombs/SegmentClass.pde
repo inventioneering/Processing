@@ -1,19 +1,26 @@
 class Segment
 {
-  // data  
+  // private data
+  // *************************************************************************************************
+  static final int animationDuration = 1;
+  
+  // instance data  
   // *************************************************************************************************
   int segmentLength;
   PVector center;
   float startAngle;
-  float currentAngle; // track angle while animating
+  float currentAngle; 
   float endAngle; 
-  float newLength;
+  float newLength;  // not sure I'm using this at all?
+  
+  // animation
   float error; 
   boolean animating;
-  int totalFrames,currentFrame;
-  int animationDuration;  // in seconds
+  int frame;
+  int totalFrames;
+  //int animationDuration;
   float angleIncrement;
-  float angleDifference;
+
   
   // constructor 
   // *************************************************************************************************
@@ -25,6 +32,10 @@ class Segment
     currentAngle = startAngle;
     endAngle = startAngle;
     newLength = segmentLength; 
+    
+    // animation
+    animating = false;
+    frame = 0;
   }
 
   
@@ -67,69 +78,55 @@ class Segment
     //https://www.desmos.com/calculator/mu1snong2u
     return 0.6714*angle*angle-1.0548*angle+sqrt(2);
   }
-  // End Getters
   // *************************************************************************************************
   
 
 
   // animation
   // *************************************************************************************************
-    void startAnimating() {    
-      this.animating = true;
-     
-      // figure out where to put this stuff...
-      error = 0.001;
-      animationDuration = 2;
-      animating = false;
-      currentFrame = 0;
-      totalFrames = $fRate * animationDuration;
-      angleDifference = (endAngle - startAngle);
-      angleIncrement = (angleDifference/totalFrames);
-      
-      if ($debug) { println("start animating"); }
-    }
+  void startAnimation() {
+    this.animating = true;
+    this.frame = 0;
     
-    void stopAnimating() {    
-       this.animating = false;
-       if ($debug) { println("stop animating"); }
+    // calculate animation stuff
+    this.totalFrames = $fRate*Segment.animationDuration;
+    float angle = this.getEndAngle() - this.getStartAngle();   // not sure if correct... might be flipped?
+    this.angleIncrement = (angle/totalFrames);          // split the distance between start and end into equal parts
+  }
+  
+  void stopAnimation() {
+    this.animating = false;
+    this.animationCompleted();
+  }
+  
+  void animate() {
+    if(this.frame <= this.totalFrames && this.animating) {
+      this.updateAnimation();
+    } else if(this.frame > this.totalFrames && this.animating) {
+      this.stopAnimation();
     }
-     
-   void updateAngle() {
-     // if ($debug) { println("upateAngle() called"); }
-      if (animating) {
-        // check to see if we should stop
-        if(currentFrame <= totalFrames) {
-          currentAngle += angleIncrement;
-          currentFrame++;
-        } else {
-          currentFrame = 0;
-          stopAnimating();
-        }
-        if ($debug) 
-        { 
-          println("frame#" + currentFrame + 
-                  " angleInc: " + angleIncrement + 
-                  " angleDiff: " + angleDifference + 
-                  " sA: " + startAngle + 
-                  " cA:" + currentAngle + 
-                  " eA: " + endAngle
-          ); 
-        }
-      }
-    }
-    
+  }
+  
+  void updateAnimation() {
+    this.currentAngle += this.angleIncrement;
+    this.frame++;
+  }
+  
+  void animationCompleted() {
+    // swap the angles after you finish the animation
+    float temp = this.endAngle;
+    this.endAngle = this.startAngle;
+    this.startAngle = temp;
+    this.currentAngle = this.startAngle;
+  }
+  
 
   // Setters
   // *************************************************************************************************
     void setCurrentAngle(float a) {
       currentAngle = a;
     }
-    
-    
-    void incrementCurrentAngle(float a) {
-      this.currentAngle = this.currentAngle + a;
-    }
-    
+      
     void setStartAngle(boolean t) {
      if (t) {
       startAngle = PI/2; // "leaning"
