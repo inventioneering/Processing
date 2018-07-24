@@ -14,6 +14,7 @@ float $currentTime;
 int $fRate = 20;
 int $strokeWeight = 3;
 Segment $testSegment;
+int $borderWidth = 100;
 // *************************************************************************************************
 
 
@@ -55,7 +56,7 @@ void animateSegments() {
 // *************************************************************************************************
 void setup() {
   $startTime = millis(); // start timer
-  size(600, 600);
+  size(800, 800);
   background(255);
   smooth(8);
   rectMode(CORNER);
@@ -63,8 +64,8 @@ void setup() {
   strokeWeight($strokeWeight);
   frameRate($fRate);
 
-  $cols = width/$gridWidth;
-  $rows = height/$gridWidth;
+  $cols = (width-2*$borderWidth)/$gridWidth;
+  $rows = (height-2*$borderWidth)/$gridWidth;
  
   //drawGrid($gridWidth);
   fillSegments();
@@ -110,6 +111,9 @@ void rotateStartEnd() {
 void draw() {
   background(255);
   
+  pushMatrix();
+  translate($borderWidth,$borderWidth);
+  
   $showing = "start";
   //rotateStartEnd();
   //showSegments($showing);
@@ -120,4 +124,5 @@ void draw() {
   animateSegments();
   showSegments("current");
 
+  popMatrix();
 }

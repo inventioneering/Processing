@@ -2,7 +2,7 @@ class Segment
 {
   // private data
   // *************************************************************************************************
-  static final int animationDuration = 5;
+  static final int animationDuration = 1;
   static final boolean showBox = true;
   static final float easing = 0.1;
   static final float error = 0.005;
@@ -103,19 +103,19 @@ class Segment
   
   void animate() {
     // with easing
-    float d = abs(this.endAngle - this.currentAngle);
-    if(animating && d < Segment.error) {
-      this.updateAnimation();
-    } else if (d > Segment.error && animating) {
-      this.stopAnimation();
-    }
-    
-    // how to do this without easing
-    //if(this.frame <= this.totalFrames && this.animating) {
+    //float d = abs(this.endAngle - this.currentAngle);
+    //if(animating && d < Segment.error) {
     //  this.updateAnimation();
-    //} else if(this.frame > this.totalFrames && this.animating) {
+    //} else if (d > Segment.error && animating) {
     //  this.stopAnimation();
     //}
+    
+    // how to do this without easing
+    if(this.frame <= this.totalFrames && this.animating) {
+      this.updateAnimation();
+    } else if(this.frame > this.totalFrames && this.animating) {
+      this.stopAnimation();
+    }
   }
   
   void updateAnimation() {
