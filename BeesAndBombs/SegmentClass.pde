@@ -3,6 +3,9 @@ class Segment
   // private data
   // *************************************************************************************************
   static final int animationDuration = 5;
+  static final boolean showBox = true;
+  static final float easing = 0.1;
+  static final float error = 0.005;
   
   // instance data  
   // *************************************************************************************************
@@ -14,7 +17,6 @@ class Segment
   float newLength;  // not sure I'm using this at all?
   
   // animation
-  float error; 
   boolean animating;
   int frame;
   int totalFrames;
@@ -100,15 +102,32 @@ class Segment
   }
   
   void animate() {
-    if(this.frame <= this.totalFrames && this.animating) {
+    // with easing
+    float d = abs(this.endAngle - this.currentAngle);
+    if(animating && d < Segment.error) {
       this.updateAnimation();
-    } else if(this.frame > this.totalFrames && this.animating) {
+    } else if (d > Segment.error && animating) {
       this.stopAnimation();
     }
+    
+    // how to do this without easing
+    //if(this.frame <= this.totalFrames && this.animating) {
+    //  this.updateAnimation();
+    //} else if(this.frame > this.totalFrames && this.animating) {
+    //  this.stopAnimation();
+    //}
   }
   
   void updateAnimation() {
-    this.currentAngle += this.angleIncrement;
+    // with easing
+    float a = this.currentAngle;
+    float targetAngle = this.endAngle;
+    float da = targetAngle - a;
+    a += da * Segment.easing;
+    this.currentAngle = a;
+    
+    // without easing
+    //this.currentAngle += this.angleIncrement;
     this.frame++;
   }
   
@@ -165,6 +184,7 @@ class Segment
 
     // Display methods
     // *************************************************************************************************
+   
     void showStart() {
       float l = getLength(startAngle);
       float k = (segmentLength/sqrt(2));
