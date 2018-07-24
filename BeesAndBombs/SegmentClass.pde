@@ -2,7 +2,7 @@ class Segment
 {
   // private data
   // *************************************************************************************************
-  static final int animationDuration = 1;
+  static final int animationDuration = 5;
   
   // instance data  
   // *************************************************************************************************

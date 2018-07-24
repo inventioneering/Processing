@@ -2,7 +2,7 @@
 
 // Globals
 // *************************************************************************************************
-int $gridWidth = 20; //10, 20, 30, 50 for(600,600) canvas size
+int $gridWidth = 50; //10, 20, 30, 50 for(600,600) canvas size
 boolean $grid = true;
 boolean $debug = false;
 boolean $looping = false;
@@ -77,7 +77,7 @@ void setup() {
   // ***********************************************************************************************
   println("rows: "+ $rows + " cols: "+$cols);
   println();
-  $testSegment = $segments.get(0);
+  //$testSegment = $segments.get(0);
   // ***********************************************************************************************
  
 }
