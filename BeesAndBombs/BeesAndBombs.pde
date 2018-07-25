@@ -6,17 +6,19 @@ int $gridWidth = 20; //10, 20, 30, 50 for(600,600) canvas size
 boolean $grid = false;
 boolean $debug = false;
 boolean $looping = false;
-int $cols, $rows;
-  
-String $showing;
-float $startTime;
-float $currentTime;
 int $fRate = 40; // 40 seems to be smoothest
 int $strokeWeight = 3;
 int $borderWidth = 100;
+int $cols, $rows;
+  
+// timer
+//float $startTime;
+//float $currentTime;
 
 
+// create a Director object to handle interactions between elements
 Director director;
+
 //// only one of these needed. We will change the behavior/attributes of these segments
 //ArrayList<Segment> $segments = new ArrayList<Segment>();
 
@@ -63,7 +65,7 @@ Director director;
 // Setup
 // *************************************************************************************************
 void setup() {
-  $startTime = millis(); // start timer
+ // $startTime = millis(); // start timer
   size(800, 800);
   background(255);
   smooth(8);
@@ -71,6 +73,7 @@ void setup() {
   stroke(0);
   strokeWeight($strokeWeight);
   frameRate($fRate);
+ // noLoop();
 
   $cols = (width-2*$borderWidth)/$gridWidth;
   $rows = (height-2*$borderWidth)/$gridWidth;
@@ -79,7 +82,6 @@ void setup() {
   //fillSegments();
   //mapPattern("start");
   //mapPattern("end");
-  $showing = "start";
   if ($grid) { drawGrid($gridWidth); };
 
   // TESTING
@@ -89,18 +91,20 @@ void setup() {
   //$testSegment = $segments.get(0);
   // ***********************************************************************************************
  
+  director = new Director();
+ 
 }
 
 // clunky way to switch, rely on $global state. Eew.
-String switchDrawing() {
-  background(255);
-  if ($grid) { drawGrid($gridWidth); };
-  if ($showing == "start") {
-    return "end"; 
-  } else {
-    return "start";
-  }
-}
+//String switchDrawing() {
+//  background(255);
+//  if ($grid) { drawGrid($gridWidth); };
+//  if ($showing == "start") {
+//    return "end"; 
+//  } else {
+//    return "start";
+//  }
+//}
 
 //void rotateStartEnd() {
 //  if($grid) { drawGrid($gridWidth); };
@@ -119,10 +123,15 @@ String switchDrawing() {
 void draw() {
   background(255);
   
-  pushMatrix();
-  translate($borderWidth,$borderWidth);
+  director.showSegments(director.getShowing());
   
-  $showing = "start";
+  // create border by shifting drawn segments
+  //pushMatrix();
+  //translate($borderWidth,$borderWidth);
+  
+  //director.showSegments("end");
+  
+  //$showing = "start";
   //rotateStartEnd();
   //showSegments($showing);
   
@@ -132,5 +141,5 @@ void draw() {
   //animateSegments();
   //showSegments("current");
 
-  popMatrix();
+  //popMatrix();
 }

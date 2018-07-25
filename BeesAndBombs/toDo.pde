@@ -12,7 +12,8 @@
 // trigger each animation at a slightly different time
 
 
-
+// QUESTIONS
+// Do I want segments to contain patterns or keep them separate?
 
 // Done
 // ----------------------------------------------------------------------------------------------------

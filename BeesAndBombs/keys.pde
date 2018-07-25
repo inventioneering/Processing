@@ -8,6 +8,15 @@ void keyPressed() {
   }
  }
  
+ // toggle between "start" and "end" patterns
+     if(key == 't') {
+       if(director.getShowing() == "start") {
+         director.setShowing("end");
+       } else {
+         director.setShowing("start");
+       }
+     }
+ 
  //if(key == 'a') {
  //  // start animation
  //  for (int i = 0; i<$rows*$cols; i++) {
