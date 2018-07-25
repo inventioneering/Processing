@@ -8,13 +8,13 @@ void keyPressed() {
   }
  }
  
- if(key == 'a') {
-   // start animation
-   for (int i = 0; i<$rows*$cols; i++) {
-     $segments.get(i).startAnimation();
-   }
+ //if(key == 'a') {
+ //  // start animation
+ //  for (int i = 0; i<$rows*$cols; i++) {
+ //    $segments.get(i).startAnimation();
+ //  }
    
- }
+ //}
 
  if(key == 'd') {
   $debug = !$debug;

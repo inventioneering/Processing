@@ -7,49 +7,57 @@ boolean $grid = false;
 boolean $debug = false;
 boolean $looping = false;
 int $cols, $rows;
-ArrayList<Segment> $segments = new ArrayList<Segment>();
+  
 String $showing;
 float $startTime;
 float $currentTime;
-int $fRate = 20;
+int $fRate = 40; // 40 seems to be smoothest
 int $strokeWeight = 3;
-Segment $testSegment;
 int $borderWidth = 100;
+
+
+Director director;
+//// only one of these needed. We will change the behavior/attributes of these segments
+//ArrayList<Segment> $segments = new ArrayList<Segment>();
+
+//// contains lots of patterns, can be changed.
+//ArrayList<Pattern> $patterns = new ArrayList<Pattern>();
+
 // *************************************************************************************************
 
 
 // Helper methods
 // *************************************************************************************************
-// fill segments with default Segment objects. Default constructor sets this.startAngle to -1
+ //fill segments with default Segment objects. Default constructor sets this.startAngle to -1
 // we will use this value as a check in subsequent steps.
-void fillSegments() {
-  for (int row = 0; row<$rows; row++) {
-    for (int col = 0; col<$cols; col++) {
-      $segments.add(new Segment(0+$gridWidth*col, 0+$gridWidth*row));
-    }
-  }
-}
+//void fillSegments() {
+//  for (int row = 0; row<$rows; row++) {
+//    for (int col = 0; col<$cols; col++) {
+//      $segments.add(new Segment(0+$gridWidth*col, 0+$gridWidth*row));
+//    }
+//  }
+//}
 
-void showSegments(String s) {
-  for (int i = 0; i<$cols*$rows; i++) {
-    if (s == "start") {
-      $segments.get(i).showStart();
-      //if ($debug) { println("showing start"); }
-    } else if (s == "current") {
-       $segments.get(i).showCurrent();
-       //if ($debug) { println("showing start"); }
-    } else {
-      $segments.get(i).showEnd();
-     // if ($debug) { println("showing end"); }
-    }
-  }
-}
+//void showSegments(String s) {
+//  for (int i = 0; i<$cols*$rows; i++) {
+//    if (s == "start") {
+//      $segments.get(i).showStart();
+//      //if ($debug) { println("showing start"); }
+//    } else if (s == "current") {
+//       $segments.get(i).showCurrent();
+//       //if ($debug) { println("showing start"); }
+//    } else {
+//      $segments.get(i).showEnd();
+//     // if ($debug) { println("showing end"); }
+//    }
+//  }
+//}
 
-void animateSegments() {
-  for (int i = 0; i<$cols*$rows; i++) {
-    $segments.get(i).animate();
-  }
-}
+//void animateSegments() {
+//  for (int i = 0; i<$cols*$rows; i++) {
+//    $segments.get(i).animate();
+//  }
+//}
 
 
 // Setup
@@ -68,9 +76,9 @@ void setup() {
   $rows = (height-2*$borderWidth)/$gridWidth;
  
   //drawGrid($gridWidth);
-  fillSegments();
-  mapPattern("start");
-  mapPattern("end");
+  //fillSegments();
+  //mapPattern("start");
+  //mapPattern("end");
   $showing = "start";
   if ($grid) { drawGrid($gridWidth); };
 
@@ -94,17 +102,17 @@ String switchDrawing() {
   }
 }
 
-void rotateStartEnd() {
-  if($grid) { drawGrid($gridWidth); };
+//void rotateStartEnd() {
+//  if($grid) { drawGrid($gridWidth); };
  
-  // flip back and forth
-  $currentTime = millis(); // get current time since start
-  if ($currentTime > $startTime + 600) { // after two seconds, switch
-    $showing = switchDrawing();
-    $startTime = $currentTime;
-  } 
-  showSegments($showing);
-}
+//  // flip back and forth
+//  $currentTime = millis(); // get current time since start
+//  if ($currentTime > $startTime + 600) { // after two seconds, switch
+//    $showing = switchDrawing();
+//    $startTime = $currentTime;
+//  } 
+//  showSegments($showing);
+//}
 
 // Draw
 // *************************************************************************************************
@@ -121,8 +129,8 @@ void draw() {
   //$testSegment.animate();
   //$testSegment.showCurrent();
   
-  animateSegments();
-  showSegments("current");
+  //animateSegments();
+  //showSegments("current");
 
   popMatrix();
 }
