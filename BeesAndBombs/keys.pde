@@ -1,4 +1,5 @@
 void keyPressed() {
+ 
  if(key == 'g') {
   $grid = !$grid; 
   if($grid) {
@@ -15,6 +16,10 @@ void keyPressed() {
        } else {
          director.setShowing("start");
        }
+     }
+     
+     if(key == 's') {
+       director.shiftPatterns();
      }
  
  //if(key == 'a') {

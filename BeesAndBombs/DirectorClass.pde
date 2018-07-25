@@ -10,11 +10,14 @@ class Director
   String showing;
   float startTime;
   float currentTime;
+  int startPatternIndex;
   Timer timer;
   
   // constructor 
   // *************************************************************************************************
    Director() {
+     startPatternIndex = 0;
+     
      // create timer object
      timer = new Timer();
      
@@ -34,16 +37,13 @@ class Director
        }
      }
 
-     // create "firstPattern"
-     addNewPattern();
+     addAllPatterns();
+     
      // map firstPattern onto "startAngle" for each Segment in segments
      mapPattern(0,"start");
-     
-     // create "secondPattern"
-     addNewPattern();
      // map secondPattern onto "endAngle" for each Segment in segments
      mapPattern(1,"end");
-    
+     
   }
   
   // methods
@@ -60,33 +60,28 @@ class Director
   // pattern methods
   // *************************************************************************************************
     // append new pattern
-    void addNewPattern() {
+    void addPattern() {
       patterns.add(new Pattern());
     }
     
-    void addTenPatterns() {
-      for (int i = 0; i< 10; i++) {
+    void addAllPatterns() {
+       for (int i = 0; i< 20; i++) {
         patterns.add(new Pattern());
       }
     }
     
-    void cycleShowPatterns() {
-      //timer.startTimer();
-      if(timer.isTimerRunning == false)
-      println("time left: " + timer.getTimeRemaining());
-      timer.getTimeRemaining();
-      if(!timer.isTimerRunning()) 
-      {
-        if(showing == "start")
-        {
-           showing = "end";
-        } 
-        else 
-        {
-           showing = "start";
-         }
+    void shiftPatterns() {
+      startPatternIndex++;
+      
+      if ($debug) {
+        println("start pattern #" + startPatternIndex + " end pattern #" + (startPatternIndex+1));
       }
-      showSegments();
+      
+      if(startPatternIndex > patterns.size()-2) {
+        startPatternIndex = 0;
+      }
+      mapPattern(startPatternIndex, "start");
+      mapPattern(startPatternIndex+1, "end");
     }
     
     // remove pattern
@@ -108,7 +103,7 @@ class Director
             }
           }
         }
-        println("mapped start pattern");
+       // println("mapped start pattern");
         return;
       } 
       
@@ -124,7 +119,7 @@ class Director
           }
         }
       }
-      println("mapped end pattern");
+      //println("mapped end pattern");
       return;
     }
     
@@ -179,10 +174,6 @@ class Director
     
   // interaction methods
   // *************************************************************************************************
-  
-  Timer getTimer() {
-    return timer;
-  }
   
   // handle timed events
   // *************************************************************************************************

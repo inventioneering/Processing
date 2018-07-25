@@ -3,6 +3,8 @@
 // Globals
 // *************************************************************************************************
 int $gridWidth = 20; //10, 20, 30, 50 for(600,600) canvas size
+int[] $gridWidthArray = {10,20,30,50,100};
+int $gridWidthArrayIndex = 1;
 boolean $grid = false;
 boolean $debug = false;
 boolean $looping = false;
@@ -61,6 +63,11 @@ Director director;
 //  }
 //}
 
+void calculateProperties() {
+  $cols = (width-2*$borderWidth)/$gridWidth;
+  $rows = (height-2*$borderWidth)/$gridWidth;
+}
+
 
 // Setup
 // *************************************************************************************************
@@ -75,8 +82,9 @@ void setup() {
   frameRate($fRate);
  // noLoop();
 
-  $cols = (width-2*$borderWidth)/$gridWidth;
-  $rows = (height-2*$borderWidth)/$gridWidth;
+  //$cols = (width-2*$borderWidth)/$gridWidth;
+  //$rows = (height-2*$borderWidth)/$gridWidth;
+  calculateProperties();
  
   //drawGrid($gridWidth);
   //fillSegments();
@@ -123,8 +131,8 @@ void setup() {
 void draw() {
   background(255);
   
-  //director.showSegments();
-  director.cycleShowPatterns();
+  director.showSegments();
+  //director.cycleShowPatterns();
   
   // create border by shifting drawn segments
   //pushMatrix();
