@@ -8,10 +8,16 @@ class Director
   ArrayList<Pattern> patterns;
   ArrayList<Segment> segments; 
   String showing;
+  float startTime;
+  float currentTime;
+  Timer timer;
   
   // constructor 
   // *************************************************************************************************
    Director() {
+     // create timer object
+     timer = new Timer();
+     
      // only one of these needed. We will change the behavior/attributes of these segments
      segments = new ArrayList<Segment>();
 
@@ -58,6 +64,31 @@ class Director
       patterns.add(new Pattern());
     }
     
+    void addTenPatterns() {
+      for (int i = 0; i< 10; i++) {
+        patterns.add(new Pattern());
+      }
+    }
+    
+    void cycleShowPatterns() {
+      //timer.startTimer();
+      if(timer.isTimerRunning == false)
+      println("time left: " + timer.getTimeRemaining());
+      timer.getTimeRemaining();
+      if(!timer.isTimerRunning()) 
+      {
+        if(showing == "start")
+        {
+           showing = "end";
+        } 
+        else 
+        {
+           showing = "start";
+         }
+      }
+      showSegments();
+    }
+    
     // remove pattern
     // apply pattern to segments
     void mapPattern(int patternNumber, String s) {
@@ -102,6 +133,28 @@ class Director
   
   
   // display segments
+  void showSegments() {
+    String s = showing;
+    pushMatrix();
+    translate($borderWidth,$borderWidth);
+    for (int i = 0; i<$cols*$rows; i++) {
+      if (s == "start") {
+        segments.get(i).showStart();
+        showing = "start";
+        //if ($debug) { println("showing start"); }
+      } else if (s == "current") {
+         segments.get(i).showCurrent();
+         showing = "current";
+         //if ($debug) { println("showing start"); }
+      } else {
+        segments.get(i).showEnd();
+        showing = "end";
+       // if ($debug) { println("showing end"); }
+      }
+    }
+    popMatrix();
+  }
+  
   void showSegments(String s) {
     pushMatrix();
     translate($borderWidth,$borderWidth);
@@ -126,6 +179,10 @@ class Director
     
   // interaction methods
   // *************************************************************************************************
+  
+  Timer getTimer() {
+    return timer;
+  }
   
   // handle timed events
   // *************************************************************************************************

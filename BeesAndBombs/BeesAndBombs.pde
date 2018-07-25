@@ -123,7 +123,8 @@ void setup() {
 void draw() {
   background(255);
   
-  director.showSegments(director.getShowing());
+  //director.showSegments();
+  director.cycleShowPatterns();
   
   // create border by shifting drawn segments
   //pushMatrix();

@@ -1,6 +1,7 @@
 // To Do
 // ----------------------------------------------------------------------------------------------------
 
+// make a timer class...
 // figure out how to weight the probability of the diagonal
 // fix the last part of the animation... it "jumps"
 // save states to disk.
