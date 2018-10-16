@@ -170,6 +170,18 @@ class Director
     }
     popMatrix();
   }
+  
+  // show next pattern in list
+  void showNext() {
+    shiftPatterns(); // go to the next pattern
+    pushMatrix();
+    translate($borderWidth,$borderWidth);
+    for (int i = 0; i<$cols*$rows; i++) {
+        segments.get(i).showStart();
+        showing = "start";
+    }
+    popMatrix();
+  }
     // animate segments
     
   // interaction methods

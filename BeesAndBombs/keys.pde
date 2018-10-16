@@ -21,6 +21,12 @@ void keyPressed() {
      if(key == 's') {
        director.shiftPatterns();
      }
+     
+     if(key == 'n') {
+       background(255);
+       if ($grid) { drawGrid($gridWidth); };
+       director.showNext();
+     }
  
  //if(key == 'a') {
  //  // start animation

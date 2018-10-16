@@ -8,7 +8,7 @@ int $gridWidthArrayIndex = 1;
 boolean $grid = false;
 boolean $debug = false;
 boolean $looping = false;
-int $fRate = 40; // 40 seems to be smoothest
+int $fRate = 40; // 40 seems to be smoothest for animation
 int $strokeWeight = 3;
 int $borderWidth = 100;
 int $cols, $rows;
@@ -100,10 +100,11 @@ void setup() {
   // ***********************************************************************************************
  
   director = new Director();
+  director.showNext();
  
 }
 
-// clunky way to switch, rely on $global state. Eew.
+ //clunky way to switch, rely on $global state. Eew.
 //String switchDrawing() {
 //  background(255);
 //  if ($grid) { drawGrid($gridWidth); };
@@ -129,9 +130,14 @@ void setup() {
 // Draw
 // *************************************************************************************************
 void draw() {
-  background(255);
+  //background(255);
   
-  director.showSegments();
+  //if ($grid) { drawGrid($gridWidth); };
+  
+  //director.showSegments();
+ 
+  //director.showNext();
+
   //director.cycleShowPatterns();
   
   // create border by shifting drawn segments
