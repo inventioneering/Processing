@@ -1,7 +1,10 @@
+// requires "CircuitPlaygroundFirmata" sketch to be installed on CircuitPlayground
+
 import processing.serial.*;
 import cc.arduino.*;
 Arduino arduino;
 float sensorValue = 0;
+float rawValue;
 
 int x = 0;
 int y = 0;
@@ -11,15 +14,16 @@ void setup()
 {
   size(500, 500);
   background(0);
-  arduino = new Arduino(this, "/dev/cu.usbmodem14511", 9600);
-  frameRate(5);
+  arduino = new Arduino(this, "/dev/cu.usbmodem14111", 9600);
+  frameRate(10);
 }
 
 void draw()
 {
-   sensorValue = map(arduino.analogRead(5),50,1000,0,1);
+  rawValue = arduino.analogRead(5);
+  sensorValue = map(rawValue,50,1000,0,1);
     createImage(sensorValue);
-    println(sensorValue);
+    println(rawValue);
 }
 
 void createImage(float v) {
