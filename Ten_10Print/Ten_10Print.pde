@@ -14,7 +14,7 @@ void setup()
 {
   size(500, 500);
   background(0);
-  arduino = new Arduino(this, "/dev/cu.usbmodem14111", 9600);
+  arduino = new Arduino(this, "/dev/cu.usbmodem14121", 9600);
   frameRate(10);
 }
 

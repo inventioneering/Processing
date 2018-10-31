@@ -1,6 +1,6 @@
 int x = 0;
 int y = 0;
-int siz = 5;
+int siz = 16;
 
 void setup() {
 size(1000,1000);
