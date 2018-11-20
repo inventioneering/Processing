@@ -6,8 +6,9 @@ void makeRectangle(float x, float y) {
   float firstY = y;
   float h = random(10,50);
   float w = random(10,50);
-  
+ 
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));  
+   dropPen();
    x += w;
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
    y+= h;
@@ -16,19 +17,21 @@ void makeRectangle(float x, float y) {
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
    
    ToDoList = (PVector[]) append(ToDoList, new PVector(firstX, firstY));
+   raisePen();
 }
 
 void makeRectangles(float startX, float startY, int rectangleCount) {
   int rectangleNumber = 0;
   while(rectangleNumber < rectangleCount) 
   {
+    //raisePen();
     makeRectangle(startX+random(-20,20), startY+random(-20,20));
     rectangleNumber++;
   }
 
 }
 
-void makeRectangleGrid(int rowCount, int columnCount) {
+void makeRectangleGrid(int rowCount, int columnCount, int numShapes) {
   float firstX = mouseX;
   float firstY = mouseY; 
   float xPos = firstX;
@@ -43,8 +46,8 @@ void makeRectangleGrid(int rowCount, int columnCount) {
   {
     while(rowNumber <= rowCount) 
     {
-      //makeRectangle(xPos, yPos);
-      makeRectangles(xPos, yPos, 6);
+      raisePen();
+      makeRectangles(xPos, yPos, numShapes);
       yPos = firstY + (rowNumber+1)*spacerSize;
       rowNumber++;
     }
@@ -81,7 +84,7 @@ void GenerateMoreArtwork()
   
  
  //makeRectangles(mouseX, mouseY, 5);
- makeRectangleGrid(3,3);
+ makeRectangleGrid(3,3,10);
  
  //makeRectangle(mouseX, mouseY);
  //grid();
