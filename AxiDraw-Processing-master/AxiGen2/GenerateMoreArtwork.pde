@@ -1,7 +1,6 @@
 // This is the function that you will adapt to create what you are looking fors
 
 
-
 void makeRectangle(float x, float y) {
   float firstX = x;
   float firstY = y;
@@ -19,28 +18,43 @@ void makeRectangle(float x, float y) {
    ToDoList = (PVector[]) append(ToDoList, new PVector(firstX, firstY));
 }
 
-void makeRectangles(float startX, float startY, int numSquares) {
-  for(int i = 0; i<numSquares; i++) {
+void makeRectangles(float startX, float startY, int rectangleCount) {
+  int rectangleNumber = 0;
+  while(rectangleNumber < rectangleCount) 
+  {
     makeRectangle(startX+random(-20,20), startY+random(-20,20));
+    rectangleNumber++;
   }
+
 }
 
-void makeRectangleGrid(int rows, int cols) {
+void makeRectangleGrid(int rowCount, int columnCount) {
   float firstX = mouseX;
   float firstY = mouseY; 
   float xPos = firstX;
   float yPos = firstY;
   
-  int spacerSize = 100;
+  int spacerSize = 90;
   
-  for(int i = 0; i<=cols; i++) {
-   for(int j = 0; j<=rows; j++) {
-     makeRectangles(xPos, yPos, 2);
-     yPos = firstY + j*spacerSize;
-   }
-   yPos = firstY;
-   xPos = firstX + i*spacerSize;
+  int rowNumber = 0;
+  int columnNumber = 0;
+  
+  while(columnNumber <= columnCount) 
+  {
+    while(rowNumber <= rowCount) 
+    {
+      //makeRectangle(xPos, yPos);
+      makeRectangles(xPos, yPos, 6);
+      yPos = firstY + (rowNumber+1)*spacerSize;
+      rowNumber++;
+    }
+    yPos = firstY;
+    xPos = firstX + (columnNumber+1)*spacerSize;
+    columnNumber++;
+    rowNumber = 0;
   }
+  
+
 }
 
 // helper functions
@@ -67,9 +81,12 @@ void GenerateMoreArtwork()
   
  
  //makeRectangles(mouseX, mouseY, 5);
- makeRectangleGrid(3,5);
+ makeRectangleGrid(3,3);
+ 
+ //makeRectangle(mouseX, mouseY);
+ //grid();
   
-  raisePen();
+  //raisePen();
 }
 
 void GenerateMoreArtwork_old()
