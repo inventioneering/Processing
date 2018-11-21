@@ -1,31 +1,14 @@
 // This is the function that you will adapt to create what you are looking fors
 
 
-void makeRectangle(float x, float y) {
-  float firstX = x;
-  float firstY = y;
-  float h = random(10,50);
-  float w = random(10,50);
- 
-   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));  
-   dropPen();
-   x += w;
-   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
-   y+= h;
-   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
-   x -= w;
-   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
-   
-   ToDoList = (PVector[]) append(ToDoList, new PVector(firstX, firstY));
-   raisePen();
-}
 
 void makeRectangles(float startX, float startY, int rectangleCount) {
   int rectangleNumber = 0;
   while(rectangleNumber < rectangleCount) 
   {
     //raisePen();
-    makeRectangle(startX+random(-20,20), startY+random(-20,20));
+    //makeRectangle(startX+random(-20,20), startY+random(-20,20));
+    makeTriangle(startX+random(-20,20), startY+random(-20,20), 40);
     rectangleNumber++;
   }
 
