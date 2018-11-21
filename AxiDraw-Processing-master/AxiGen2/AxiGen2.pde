@@ -167,6 +167,7 @@ SimpleButton UIMessage;
 
 void setup() 
 {
+  circlePoints = new ArrayList<PVector>();
   size(800, 631, P2D);
   //pixelDensity(2);
 

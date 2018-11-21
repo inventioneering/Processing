@@ -2,16 +2,24 @@
 
 
 
+void makeShapes(float startX, float startY, int shapeCount) {
+  int shapeNumber = 0;
+  while(shapeNumber < shapeCount) 
+  {
+    //makeRectangle(startX+random(-20,20), startY+random(-20,20));
+    //makeTriangle(startX+random(-20,20), startY+random(-20,20), 40);
+    makeCircle(startX+random(-20,20), startY+random(-20,20),50);
+    shapeNumber++;
+  }
+}
+
 void makeRectangles(float startX, float startY, int rectangleCount) {
   int rectangleNumber = 0;
   while(rectangleNumber < rectangleCount) 
   {
-    //raisePen();
-    //makeRectangle(startX+random(-20,20), startY+random(-20,20));
-    makeTriangle(startX+random(-20,20), startY+random(-20,20), 40);
+    makeRectangle(startX+random(-20,20), startY+random(-20,20));
     rectangleNumber++;
   }
-
 }
 
 void makeRectangleGrid(int rowCount, int columnCount, int numShapes) {
@@ -25,12 +33,12 @@ void makeRectangleGrid(int rowCount, int columnCount, int numShapes) {
   int rowNumber = 0;
   int columnNumber = 0;
   
-  while(columnNumber <= columnCount) 
+  while(columnNumber < columnCount) 
   {
-    while(rowNumber <= rowCount) 
+    while(rowNumber < rowCount) 
     {
       raisePen();
-      makeRectangles(xPos, yPos, numShapes);
+      makeShapes(xPos, yPos, numShapes);
       yPos = firstY + (rowNumber+1)*spacerSize;
       rowNumber++;
     }
@@ -67,7 +75,7 @@ void GenerateMoreArtwork()
   
  
  //makeRectangles(mouseX, mouseY, 5);
- makeRectangleGrid(3,3,10);
+ makeRectangleGrid(3,3,5);
  
  //makeRectangle(mouseX, mouseY);
  //grid();
