@@ -37,3 +37,27 @@ void makeTriangle(float x, float y, float range) {
    ToDoList = (PVector[]) append(ToDoList, new PVector(firstX, firstY));
    raisePen();
 }
+
+void makeCircle(float x, float y, float range) {
+  float firstX = x;
+  float firstY = y;
+ 
+   // need random x,y
+   // need random radius
+   
+   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));  
+   dropPen();
+   
+   x += random(-range, range);
+   y += random(-range, range);
+   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
+   
+   x = firstX;
+   y = firstY;
+   x += random(-range, range);
+   y += random(-range, range);
+   ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
+  
+   ToDoList = (PVector[]) append(ToDoList, new PVector(firstX, firstY));
+   raisePen();
+}
