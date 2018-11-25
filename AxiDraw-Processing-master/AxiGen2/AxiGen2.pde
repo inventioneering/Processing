@@ -62,10 +62,10 @@ float PixelsPerInch = 63.3;
 
 // Positions of screen items
 
-int MousePaperLeft =  30;
-int MousePaperRight =  770;
-int MousePaperTop =  62;
-int MousePaperBottom =  600;
+int MousePaperLeft =  30;  // 30
+int MousePaperRight =  770; //770
+int MousePaperTop =  62;  // 62
+int MousePaperBottom =  600; // 600
 
 int yBrushRestPositionPixels = 6;
 

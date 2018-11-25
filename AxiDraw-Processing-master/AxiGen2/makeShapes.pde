@@ -3,9 +3,9 @@ void makeRectangle(float x, float y) {
   float firstY = y;
   float h = random(10,50);
   float w = random(10,50);
- 
+    //dropPen(); // place here to enable draglines
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));  
-   dropPen();
+    dropPen(); // place here to remove drag lines
    x += w;
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));
    y+= h;
@@ -21,8 +21,9 @@ void makeTriangle(float x, float y, float range) {
   float firstX = x;
   float firstY = y;
  
+   //dropPen(); // place here to enable drag lines
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));  
-   dropPen();
+   dropPen();  // place here to remove drag lines
    
    x += random(-range, range);
    y += random(-range, range);
@@ -43,7 +44,7 @@ void makeTriangle(float x, float y, float range) {
   
   void findCirclePoints(float startX, float startY, float size) {
     circlePoints.clear();
-    for(float i = 0; i<2*PI; i+=PI/200) {
+    for(float i = 0; i<PI; i+=PI/36) {
       float tx = size*cos(i)*cos(i) + startX;
       float ty = size*cos(i)*sin(i) + startY;
       circlePoints.add(new PVector(tx,ty));
@@ -54,8 +55,9 @@ void makeTriangle(float x, float y, float range) {
 void makeCircle(float x, float y, float size) {
 
   findCirclePoints(x, y, size);
+  //dropPen(); // place here to enable drag lines
   ToDoList = (PVector[]) append(ToDoList, new PVector(circlePoints.get(0).x, circlePoints.get(0).y));
-  dropPen();
+  dropPen(); //place here to remove drag lines
   
   for(int i = 1; i<circlePoints.size(); i++) {
     PVector temp = circlePoints.get(i);

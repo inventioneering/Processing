@@ -75,7 +75,7 @@ void GenerateMoreArtwork()
   
  
  //makeRectangles(mouseX, mouseY, 5);
- makeRectangleGrid(3,3,5);
+ makeRectangleGrid(4,4,7);
  
  //makeRectangle(mouseX, mouseY);
  //grid();
