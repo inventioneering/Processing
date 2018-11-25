@@ -1,17 +1,29 @@
 void makeRectangle(float x, float y) {
+  float minDist = -20;
+  float maxDist = 20;
+  
+  // use these values for pseudo randomness in position of rectangle 
+  x = x + map(randomizer.getPseudoRandom(),0,1,minDist,maxDist);
+  y = y + map(randomizer.getPseudoRandom(),0,1,minDist,maxDist);
+  
+  // use these value for perlin randomness in position of rectangle
+  // x = x + map(randomizer.getPerlinRandom(),0,1,minDist,maxDist);
+  // y = y + map(randomizer.getPerlinRandom(),0,1,minDist,maxDist);
+  
   float firstX = x;
   float firstY = y;
-  float min = 10;
-  float max = 50;
   
-  // use these values for pseudo randomness
-  //float h = map(pseudoRandom(),0,1,min,max);
-  //float w = map(pseudoRandom(),0,1,min,max);
+  // change these to control size of rectangles
+  float minLength = 10;
+  float maxLength = 50;
+ 
+  // use these values for pseudo randomness in size of rectangle
+  float h = map(randomizer.getPseudoRandom(),0,1,minLength,maxLength);
+  float w = map(randomizer.getPseudoRandom(),0,1,minLength,maxLength);
   
-  // use these values for pelin randomness
-  // use these values for pseudo randomness
-  float h = map(perlin.getCurrentValue(),0,1,min,max);
-  float w = map(perlin.getCurrentValue(),0,1,min,max);
+  // use these values for pelin randomness in size of rectangle
+  //float h = map(randomizer.getPerlinRandom(),0,1,minLength,maxLength);
+  //float w = map(randomizer.getPerlinRandom(),0,1,minLength,maxLength);
   
   
     //dropPen(); // place here to enable draglines

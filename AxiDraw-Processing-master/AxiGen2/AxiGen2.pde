@@ -13,8 +13,8 @@
 import de.looksgood.ani.*;
 import processing.serial.*;
 
-Perlin perlin; // used to generate Perlin randomness
-float perlinDelta = 0.1;
+Randomizer randomizer; // used to generate Perlin randomness
+float perlinDelta = 0.05; // change this to change random behavior of perlin object
 
 // User Settings: 
 float MotorSpeed = 4000.0;  // Steps per second, 1500 default
@@ -169,7 +169,7 @@ SimpleButton UIMessage;
 
 void setup() 
 {
-  perlin = new Perlin(0, perlinDelta);
+  randomizer = new Randomizer(0, perlinDelta);
   
   circlePoints = new ArrayList<PVector>();
   size(800, 631, P2D);
