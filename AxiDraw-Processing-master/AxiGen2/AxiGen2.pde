@@ -194,8 +194,8 @@ void setup()
     MousePaperBottom = round(MousePaperTop + PixelsPerInch * 210/25.4);
   } else
   {
-    MousePaperRight = round(MousePaperLeft + PixelsPerInch * 11.0);
-    MousePaperBottom = round(MousePaperTop + PixelsPerInch * 8.5);
+    MousePaperRight = round(MousePaperLeft + PixelsPerInch * 11); // 11
+    MousePaperBottom = round(MousePaperTop + PixelsPerInch * 8.5); // 8.5
   }
 
 
@@ -517,6 +517,7 @@ void drawToDoList()
 
 
 void draw() {
+ 
 
   if (debugMode)
   {
@@ -605,6 +606,10 @@ void draw() {
       redrawButtons();
     }
   }
+  
+   stroke(0,200,0);
+   noFill();
+  rect(MousePaperLeft,MousePaperTop,500,500);
 }
 
 
