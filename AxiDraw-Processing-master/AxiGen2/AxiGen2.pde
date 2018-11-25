@@ -14,7 +14,7 @@ import de.looksgood.ani.*;
 import processing.serial.*;
 
 Randomizer randomizer; // used to generate Perlin randomness
-float perlinDelta = 0.05; // change this to change random behavior of perlin object
+float perlinDelta = 2.7; // change this to change random behavior of perlin object
 
 // User Settings: 
 float MotorSpeed = 4000.0;  // Steps per second, 1500 default
@@ -170,7 +170,7 @@ SimpleButton UIMessage;
 void setup() 
 {
   randomizer = new Randomizer(0, perlinDelta);
-  
+
   circlePoints = new ArrayList<PVector>();
   size(800, 631, P2D);
   //pixelDensity(2);
@@ -521,7 +521,7 @@ void drawToDoList()
 
 
 void draw() {
- 
+
 
   if (debugMode)
   {
@@ -610,14 +610,12 @@ void draw() {
       redrawButtons();
     }
   }
-  
-   stroke(0,200,0);
-   noFill();
-  rect(MousePaperLeft,MousePaperTop,500,500);
-  
+
+  stroke(0, 200, 0);
+  noFill();
+  rect(MousePaperLeft, MousePaperTop, 500, 500);
+
   //println(pseudoRandom());
-  
- 
 }
 
 
@@ -629,8 +627,7 @@ void mousePressed() {
   if ((mouseX >= MousePaperLeft) && (mouseX <= MousePaperRight) && (mouseY >= MousePaperTop) && (mouseY <= MousePaperBottom))
   { 
 
-    //GenerateArtwork(mouseX, mouseY, 5 + random(25), 100);
-    GenerateMoreArtwork();
+    generateArtwork();
 
     doHighlightRedraw = true;
   }
