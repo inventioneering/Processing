@@ -13,6 +13,8 @@
 import de.looksgood.ani.*;
 import processing.serial.*;
 
+Perlin perlin; // used to generate Perlin randomness
+float perlinDelta = 0.1;
 
 // User Settings: 
 float MotorSpeed = 4000.0;  // Steps per second, 1500 default
@@ -167,6 +169,8 @@ SimpleButton UIMessage;
 
 void setup() 
 {
+  perlin = new Perlin(0, perlinDelta);
+  
   circlePoints = new ArrayList<PVector>();
   size(800, 631, P2D);
   //pixelDensity(2);
@@ -610,6 +614,10 @@ void draw() {
    stroke(0,200,0);
    noFill();
   rect(MousePaperLeft,MousePaperTop,500,500);
+  
+  //println(pseudoRandom());
+  
+ 
 }
 
 

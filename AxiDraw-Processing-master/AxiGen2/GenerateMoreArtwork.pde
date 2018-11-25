@@ -6,9 +6,9 @@ void makeShapes(float startX, float startY, int shapeCount) {
   int shapeNumber = 0;
   while(shapeNumber < shapeCount) 
   {
-    //makeRectangle(startX+random(-20,20), startY+random(-20,20));
+    makeRectangle(startX+random(-20,20), startY+random(-20,20));
     //makeTriangle(startX+random(-20,20), startY+random(-20,20), 40);
-    makeCircle(startX+random(-20,20), startY+random(-20,20),50);
+    //makeCircle(startX+random(-20,20), startY+random(-20,20),50);
     shapeNumber++;
   }
 }

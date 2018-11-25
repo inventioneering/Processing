@@ -1,8 +1,19 @@
 void makeRectangle(float x, float y) {
   float firstX = x;
   float firstY = y;
-  float h = random(10,50);
-  float w = random(10,50);
+  float min = 10;
+  float max = 50;
+  
+  // use these values for pseudo randomness
+  //float h = map(pseudoRandom(),0,1,min,max);
+  //float w = map(pseudoRandom(),0,1,min,max);
+  
+  // use these values for pelin randomness
+  // use these values for pseudo randomness
+  float h = map(perlin.getCurrentValue(),0,1,min,max);
+  float w = map(perlin.getCurrentValue(),0,1,min,max);
+  
+  
     //dropPen(); // place here to enable draglines
    ToDoList = (PVector[]) append(ToDoList, new PVector(x, y));  
     dropPen(); // place here to remove drag lines
@@ -48,7 +59,7 @@ void makeTriangle(float x, float y, float range) {
       float tx = size*cos(i)*cos(i) + startX;
       float ty = size*cos(i)*sin(i) + startY;
       circlePoints.add(new PVector(tx,ty));
-      println(circlePoints.get(0).x);
+      //println(circlePoints.get(0).x);  // debugging
     }
   }
   
