@@ -1,4 +1,6 @@
 import Turtle.*;
+// https://en.wikipedia.org/wiki/Sierpi%C5%84ski_curve
+// https://github.com/matthewalangreen/TortoiseGraphics/blob/master/Playground/Playground.playground/Pages/Sierpinski%20Arrowhead.xcplaygroundpage/Contents.swift
 import processing.svg.*;
 
 Turtle t;
