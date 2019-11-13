@@ -1,6 +1,8 @@
 import processing.serial.*;
 Serial myPort;
 float x, y, z, button_a, button_b, rectX, rectY, rectSize;
+float mapX, mapY;
+
 
 void setup() {
   size(500, 500);
@@ -16,11 +18,21 @@ void setup() {
 
 void draw() {
 
-  background(0);
-  fill(255);
-  rectX += x;
-  rectY += y;
-  rect(rectX, rectY, rectSize, rectSize);
+  if(button_a == 1) {
+    background(0);
+  } else {
+    background(255);
+  }
+  
+  if(button_b == 1) {
+    fill(0,255,0);
+  } else {
+      fill(255);
+  }
+
+  mapX = map(x, -1027, 1027, 0, width);
+  mapY = map(y, -1027, 2017, 0, height);
+  rect(mapX, mapY, rectSize, rectSize);
 }
 
 void serialEvent(Serial myPort) {
