@@ -1,6 +1,6 @@
 import processing.serial.*;
 Serial myPort;
-float x, y, z, rectX, rectY, rectSize;
+float x, y, z, button_a, button_b, rectX, rectY, rectSize;
 
 void setup() {
   size(500, 500);
@@ -29,42 +29,21 @@ void serialEvent(Serial myPort) {
 
   if (string != null) {
     string = trim(string);
-    float[] data = float(splitTokens(string));
-    String[] stringData = splitTokens(string);
-      if (data.length >=3) {
-      x = data[0];
-      y = data[1];
-      z = data[2];
-    }
-
-    // Show values to console for debugging
-    //print("x: ",data[0]);
-    //print("\t");
-    //print("y: ",data[1]);
-    //print("\t");
-    //print("z: ",data[2]);
-    //print("\n");
-    //println(string);
-    //println("string: " + string + " raw x: " + xS + " int(s): " + int(xS) + " float(s) " + float(xS));
-    //println("string: " + string);
-
-    //println(cleanString(string));
-    //printArray(stringArrayFromCleanString(cleanString(string)));
-   // String[] dataString = stringArrayFromCleanString(cleanString(string));
-    //printArray(dataString);
-   // println("[3]" + dataString[3]);
+    //float[] data = float(splitTokens(string));
+   // String[] stringData = splitTokens(string);
+    
    
    String[] resultString = cleanStringArray(string);
-    float xx = getVal(resultString, 0);
-    float yy = getVal(resultString, 1);
-    float zz = getVal(resultString, 2);
-    float btn_a = getVal(resultString, 3);
-    float btn_b = getVal(resultString, 4);
-    //println("x: " + xx + " y: " + yy + " z: " + zz + "button_a: " + btn_a + " button_b: " + btn_b);
+    x = getVal(resultString, 0);
+    y = getVal(resultString, 1);
+    z = getVal(resultString, 2);
+    button_a = getVal(resultString, 3);
+    button_b = getVal(resultString, 4);
+    println("x: " + x + " y: " + y + " z: " + z + "button_a: " + button_a + " button_b: " + button_b);
    // println(string);
    
    
-   printArray(cleanStringArray(string));
+   printArray(resultString);
   }
 }
 
